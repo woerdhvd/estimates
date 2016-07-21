@@ -6,6 +6,28 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
 {
+    public static $prefixLengthsPsr4 = array (
+        'P' => 
+        array (
+            'Phroute\\Phroute\\' => 16,
+        ),
+        'K' => 
+        array (
+            'Klein\\' => 6,
+        ),
+    );
+
+    public static $prefixDirsPsr4 = array (
+        'Phroute\\Phroute\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/phroute/phroute/src/Phroute',
+        ),
+        'Klein\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/klein/klein/src/Klein',
+        ),
+    );
+
     public static $classMap = array (
         'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
@@ -21,6 +43,8 @@ class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixLengthsPsr4 = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$prefixDirsPsr4;
             $loader->classMap = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$classMap;
 
         }, null, ClassLoader::class);
