@@ -28,6 +28,16 @@ class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
         ),
     );
 
+    public static $prefixesPsr0 = array (
+        'M' => 
+        array (
+            'Mustache' => 
+            array (
+                0 => __DIR__ . '/..' . '/mustache/mustache/src',
+            ),
+        ),
+    );
+
     public static $classMap = array (
         'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
@@ -45,6 +55,7 @@ class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$prefixesPsr0;
             $loader->classMap = ComposerStaticInit28499d0f19fdeeae370893126050b6fb::$classMap;
 
         }, null, ClassLoader::class);

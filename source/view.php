@@ -6,8 +6,18 @@
 class View
 {
 
-  function __construct($config)
+  private $path;
+  private $engine;
+
+  function __construct($path)
   {
-    # code...
+    $this->path = $path;
+    $this->engine = new Mustache_Engine;
+  }
+
+  function render ($view, $model = [])
+  {
+    $template = file_get_contents("$this->path/$view.hbs");
+    echo $this->engine->render($template, $model);
   }
 }

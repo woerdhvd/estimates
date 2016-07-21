@@ -2,9 +2,8 @@
     "name": "reinvdwoerd/estimates",
     "type": "project",
     "require": {
-        "altorouter/altorouter": "^1.2",
         "phpmailer/phpmailer": "^5.2",
         "klein/klein": "^2.1",
-        "phroute/phroute": "^2.1"
+        "mustache/mustache": "^2.10"
     }
 }

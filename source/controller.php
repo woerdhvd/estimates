@@ -5,9 +5,39 @@
  */
 class Controller
 {
+  private $auth;
+  private $estimates;
+  private $view;
 
-  function __construct($accounts, $estimates, $view)
+  function __construct($auth, $estimates, $view)
   {
-    # code...
+    $this->auth = $auth;
+    $this->estimates = $estimates;
+    $this->view = $view;
+  }
+
+  function showSetup ()
+  {
+
+  }
+
+  function showForm ()
+  {
+    $this->view->render('form/form', ['greeting' => 'hello']);
+  }
+
+  function handleSubmit ()
+  {
+
+  }
+
+  function showLogin ()
+  {
+
+  }
+
+  function showEstimates ()
+  {
+
   }
 }

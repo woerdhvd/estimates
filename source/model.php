@@ -5,7 +5,7 @@
  */
 class Model
 {
-  private $db;
+  protected $db;
 
   function __construct($config)
   {
