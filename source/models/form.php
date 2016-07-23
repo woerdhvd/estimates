@@ -6,7 +6,7 @@
  * 		and past form fields
  */
 
-class FormValues extends Model
+class Form extends Model
 {
 
   function __construct($config)

@@ -6,6 +6,12 @@
  */
 class Auth extends Model
 {
+  function __construct ($config)
+  {
+    parent::__construct($config);
+    session_start();
+  }
+
   function migrate()
   {
     $this->db->query(
@@ -31,9 +37,13 @@ class Auth extends Model
 
   function isAuthorized ($username, $password)
   {
-    $user = $this->db->query(
-      "SELE"
-    );
+    $result = $this->db->query("SELECT * FROM auth LIMIT 1");
+    $user = $result->fetch();
+
+    $usernameCorrect = $user['username'] == $username;
+    $passwordCorrect = password_verify($password, $user['hash']);
+
+    return $usernameCorrect && $passwordCorrect;
   }
 
   function userExists ()
@@ -42,5 +52,22 @@ class Auth extends Model
       "SELECT count(*) FROM auth LIMIT 1"
     );
     return intval($result->fetchAll()[0][0]);
+  }
+
+  function isLoggedIn ()
+  {
+    return isset($_SESSION['logged_in']);
+  }
+
+  function login ($username, $password)
+  {
+    $isAuthorized = $this->isAuthorized($username, $password);
+    $_SESSION['logged_in'] = $isAuthorized;
+    return $isAuthorized;
+  }
+
+  function logout ()
+  {
+    session_destroy();
   }
 }
