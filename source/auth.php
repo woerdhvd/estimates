@@ -41,6 +41,6 @@ class Auth extends Model
     $result = $this->db->query(
       "SELECT count(*) FROM auth LIMIT 1"
     );
-    return count($result->fetchAll()) > 0;
+    return intval($result->fetchAll()[0][0]);
   }
 }

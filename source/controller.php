@@ -18,12 +18,27 @@ class Controller
 
   function showSetup ()
   {
-
+    if (!$this->auth->userExists())
+      $this->view->render('admin/setup');
   }
 
-  function showForm ()
+  function handleSetup ($formValues)
   {
-    $this->view->render('form/form', ['greeting' => 'hello']);
+    $this->auth->setUser(
+      $formValues['username'],
+      $formValues['password'],
+      $formValues['email']
+    );
+  }
+
+  function showForm ($response)
+  {
+    if (!$this->auth->userExists())
+      $response->redirect('setup');
+    else
+    {
+      echo "user looks like existing";
+    }
   }
 
   function handleSubmit ()

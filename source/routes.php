@@ -28,12 +28,20 @@ $controller = new Controller($auth, $estimates, $view);
 // GET '/admin/estimates' -> logged in ? -> estimates : -> redirect
 // GET '/admin/form' -> logged in ? -> admin/form : -> redirect
 
-$klein->respond('GET', $relative . '/', function ($request) use ($controller) {
-  $controller->showForm();
+$klein->respond('GET', $relative . '/', function ($request, $response) use ($controller) {
+  $controller->showForm($response);
 });
 
 $klein->respond('GET', $relative . '/admin', function ($request) use ($controller) {
   $controller->showLogin();
+});
+
+$klein->respond('GET', $relative . '/setup', function ($request) use ($controller) {
+  $controller->showSetup($request);
+});
+
+$klein->respond('POST', $relative . '/setup', function ($request) use ($controller) {
+  $controller->handleSetup($request->paramsPost());
 });
 
 
