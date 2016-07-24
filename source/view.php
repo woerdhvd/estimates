@@ -9,15 +9,17 @@ class View
   private $path;
   private $engine;
 
-  function __construct($path)
+  function __construct($path = '/../views')
   {
     $this->path = $path;
-    $this->engine = new Mustache_Engine;
+    $this->engine = new Mustache_Engine([
+      'loader'          => new Mustache_Loader_FilesystemLoader(__DIR__ . $path),
+      'partials_loader' => new Mustache_Loader_FilesystemLoader(__DIR__ . $path . '/partials'),
+    ]);
   }
 
   function render ($view, $model = [])
   {
-    $template = file_get_contents("$this->path/$view.hbs");
-    echo $this->engine->render($template, $model);
+    echo $this->engine->render($view, $model);
   }
 }

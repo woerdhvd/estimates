@@ -1,0 +1,8 @@
+@font-face {
+    font-family: Mark Pro;
+    src: url('../fonts/MarkWebPro-Book.woff');
+}
+
+* {
+  font-family: Mark Pro;
+}

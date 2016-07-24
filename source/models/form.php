@@ -11,6 +11,6 @@ class Form extends Model
 
   function __construct($config)
   {
-    # code...
+    
   }
 }

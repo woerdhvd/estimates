@@ -20,16 +20,16 @@ $klein->respond('POST', $relative . '/login', function ($req, $res) use ($auth, 
  * Admin views - TODO: remove duplication
  */
 $klein->respond('GET', $relative . '/admin/estimates', function ($req, $res) use ($view, $relative, $auth) {
-  if (!$auth->isLoggedIn())
-    $res->redirect($relative . '/login');
-  else
+  // if (!$auth->isLoggedIn())
+  //   $res->redirect($relative . '/login');
+  // else
     $view->render('admin/estimates');
 });
 
 $klein->respond('GET', $relative . '/admin/form', function ($req, $res) use ($view, $relative, $auth) {
-  if (!$auth->isLoggedIn())
-    $res->redirect($relative . '/login');
-  else
+  // if (!$auth->isLoggedIn())
+  //   $res->redirect($relative . '/login');
+  //   else
     $view->render('admin/form');
 });
 
