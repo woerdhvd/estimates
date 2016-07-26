@@ -3,6 +3,7 @@
 /**
  * Auth
  * 	- Model class responsible for authentication
+ * 	TODO: className, formOptionsByEstimate
  */
 class Auth extends Model
 {
