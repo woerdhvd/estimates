@@ -9,7 +9,7 @@ class Estimates extends Model
   function migrate ()
   {
     $this->db->query(
-      "CREATE TABLE IF NOT EXISTS estimates (
+      "CREATE TABLE IF NOT EXISTS Estimates (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         fullName VARCHAR(255),
         email VARCHAR(255),

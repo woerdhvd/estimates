@@ -16,7 +16,7 @@ class Auth extends Model
   function migrate()
   {
     $this->db->query(
-      "CREATE TABLE IF NOT EXISTS auth (
+      "CREATE TABLE IF NOT EXISTS Auth (
         username varchar(255),
         hash varchar(255),
         email varchar(255)
@@ -52,7 +52,10 @@ class Auth extends Model
     $result = $this->db->query(
       "SELECT count(*) FROM auth LIMIT 1"
     );
-    return intval($result->fetchAll()[0][0]);
+    if (!$result)
+      return false;
+    else
+      return intval($result->fetchAll()[0][0]);
   }
 
   function isLoggedIn ()

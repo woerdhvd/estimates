@@ -11,7 +11,7 @@ class FormOptions extends Model
   function migrate ()
   {
     $this->db->query(
-      "CREATE TABLE IF NOT EXISTS formoptions (
+      "CREATE TABLE IF NOT EXISTS FormOptions (
         id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
         title VARCHAR(255),
         description TEXT,
