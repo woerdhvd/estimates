@@ -7,6 +7,7 @@ import Html.Attributes exposing (..)
 import Debug exposing (log)
 import String
 import Utils exposing (..)
+import FormOption.Model exposing (..)
 
 
 main =
@@ -19,32 +20,6 @@ main =
 
 
 -- model
-
-
-type alias Id =
-    Int
-
-
-type alias OrderIndex =
-    Int
-
-
-type alias SubOption =
-    { id : Id
-    , label : String
-    , cost : Int
-    }
-
-
-type alias FormOption =
-    { id : Id
-    , orderIndex : OrderIndex
-    , title : String
-    , description : String
-    , subOptions : List SubOption
-    , cost : Float
-    }
-
 
 type alias Model =
     { formOptions : List FormOption
@@ -110,8 +85,8 @@ update msg model =
 view : Model -> Html Msg
 view model =
     Html.form [ onSubmit NoOp ]
-        [ css "form/form.css"
-        , css "form/fonts.css"
+        [ css "static/styles/form.css"
+        , css "static/styles/fonts.css"
         , h1 [] [ text "Aanvraag prijsopgave website" ]
         , formOptions model.formOptions
         ]
