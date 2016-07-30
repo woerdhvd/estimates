@@ -1,7 +1,7 @@
 <?php
 
 
-class setupController extends Controller
+class SetupController extends Controller
 {
   function showSetup ($req, $res)
   {

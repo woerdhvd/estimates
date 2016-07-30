@@ -1,0 +1,290 @@
+var _user$project$Main$css = function (href) {
+	return A3(
+		_elm_lang$html$Html$node,
+		'link',
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$rel('stylesheet'),
+				_elm_lang$html$Html_Attributes$href(href)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _user$project$Main$SubOption = F3(
+	function (a, b, c) {
+		return {id: a, label: b, cost: c};
+	});
+var _user$project$Main$FormOption = F6(
+	function (a, b, c, d, e, f) {
+		return {id: a, orderIndex: b, title: c, description: d, subOptions: e, cost: f};
+	});
+var _user$project$Main$update = F2(
+	function (msg, model) {
+		var _p0 = msg;
+		switch (_p0.ctor) {
+			case 'AddOption':
+				return _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						formOptions: A2(
+							_elm_lang$core$Basics_ops['++'],
+							model.formOptions,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									A6(
+									_user$project$Main$FormOption,
+									model.uid,
+									0,
+									'',
+									'',
+									_elm_lang$core$Native_List.fromArray(
+										[]),
+									0)
+								])),
+						uid: model.uid + 1
+					});
+			case 'AddSubOption':
+				return A2(
+					_user$project$Utils$updateFormOptions,
+					A2(
+						_user$project$Utils$withId,
+						_user$project$Utils$addSubOption(
+							A3(_user$project$Main$SubOption, model.uid, '', 0)),
+						_p0._0),
+					model);
+			case 'UpdateTitle':
+				return A2(
+					_user$project$Utils$updateFormOptions,
+					A2(
+						_user$project$Utils$withId,
+						_user$project$Utils$updateTitle(_p0._1),
+						_p0._0),
+					model);
+			case 'UpdateCost':
+				return A2(
+					_user$project$Utils$updateFormOptions,
+					A2(
+						_user$project$Utils$withId,
+						_user$project$Utils$updateCost(
+							_user$project$Utils$toCost(_p0._1)),
+						_p0._0),
+					model);
+			case 'UpdateDescription':
+				return A2(
+					_user$project$Utils$updateFormOptions,
+					A2(
+						_user$project$Utils$withId,
+						_user$project$Utils$updateDescription(_p0._1),
+						_p0._0),
+					model);
+			case 'RemoveOption':
+				return A2(
+					_user$project$Utils$updateFormOptions,
+					_user$project$Utils$removeWithId(_p0._0),
+					model);
+			default:
+				return model;
+		}
+	});
+var _user$project$Main$Model = F2(
+	function (a, b) {
+		return {formOptions: a, uid: b};
+	});
+var _user$project$Main$initmodel = A2(
+	_user$project$Main$Model,
+	_elm_lang$core$Native_List.fromArray(
+		[]),
+	0);
+var _user$project$Main$UpdateSubOptionLabel = F3(
+	function (a, b, c) {
+		return {ctor: 'UpdateSubOptionLabel', _0: a, _1: b, _2: c};
+	});
+var _user$project$Main$subOption = F2(
+	function (id, subOption) {
+		return A2(
+			_elm_lang$html$Html$li,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('sub-option')
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$input,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$value(
+							A2(_elm_lang$core$Debug$log, 'label', subOption.label)),
+							_elm_lang$html$Html_Attributes$placeholder('Optie'),
+							_elm_lang$html$Html_Events$onInput(
+							A2(_user$project$Main$UpdateSubOptionLabel, id, subOption.id))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[]))
+				]));
+	});
+var _user$project$Main$subOptions = F2(
+	function (subOptions, id) {
+		return A2(
+			_elm_lang$html$Html$ul,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$class('sub-options')
+				]),
+			A2(
+				_elm_lang$core$List$map,
+				_user$project$Main$subOption(id),
+				subOptions));
+	});
+var _user$project$Main$UpdateOrder = F2(
+	function (a, b) {
+		return {ctor: 'UpdateOrder', _0: a, _1: b};
+	});
+var _user$project$Main$UpdateDescription = F2(
+	function (a, b) {
+		return {ctor: 'UpdateDescription', _0: a, _1: b};
+	});
+var _user$project$Main$UpdateCost = F2(
+	function (a, b) {
+		return {ctor: 'UpdateCost', _0: a, _1: b};
+	});
+var _user$project$Main$UpdateTitle = F2(
+	function (a, b) {
+		return {ctor: 'UpdateTitle', _0: a, _1: b};
+	});
+var _user$project$Main$RemoveOption = function (a) {
+	return {ctor: 'RemoveOption', _0: a};
+};
+var _user$project$Main$AddSubOption = function (a) {
+	return {ctor: 'AddSubOption', _0: a};
+};
+var _user$project$Main$option = function (option) {
+	return A2(
+		_elm_lang$html$Html$li,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$class('form-option')
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('title'),
+						_elm_lang$html$Html_Attributes$value(option.title),
+						_elm_lang$html$Html_Attributes$placeholder('Feature'),
+						_elm_lang$html$Html_Events$onInput(
+						_user$project$Main$UpdateTitle(option.id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$input,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('cost'),
+						_elm_lang$html$Html_Attributes$value(
+						_elm_lang$core$Native_Utils.eq(option.cost, 0) ? '' : A2(
+							_elm_lang$core$Basics_ops['++'],
+							'€',
+							_elm_lang$core$Basics$toString(option.cost))),
+						_elm_lang$html$Html_Attributes$placeholder('Prijs'),
+						_elm_lang$html$Html_Events$onInput(
+						_user$project$Main$UpdateCost(option.id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('remove'),
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Main$RemoveOption(option.id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('-')
+					])),
+				A2(
+				_elm_lang$html$Html$button,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('add-suboption'),
+						_elm_lang$html$Html_Events$onClick(
+						_user$project$Main$AddSubOption(option.id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('+')
+					])),
+				A2(
+				_elm_lang$html$Html$textarea,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$class('description'),
+						_elm_lang$html$Html_Attributes$value(option.description),
+						_elm_lang$html$Html_Attributes$placeholder('Beschrijving'),
+						_elm_lang$html$Html_Events$onInput(
+						_user$project$Main$UpdateDescription(option.id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[])),
+				A2(_user$project$Main$subOptions, option.subOptions, option.id)
+			]));
+};
+var _user$project$Main$AddOption = {ctor: 'AddOption'};
+var _user$project$Main$addOption = A2(
+	_elm_lang$html$Html$div,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$class('add-form-option'),
+			_elm_lang$html$Html_Events$onClick(_user$project$Main$AddOption)
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html$text('+')
+		]));
+var _user$project$Main$formOptions = function (formOptions) {
+	return A2(
+		_elm_lang$html$Html$ul,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$id('form-options')
+			]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(_elm_lang$core$List$map, _user$project$Main$option, formOptions),
+			_elm_lang$core$Native_List.fromArray(
+				[_user$project$Main$addOption])));
+};
+var _user$project$Main$Save = {ctor: 'Save'};
+var _user$project$Main$Fetch = {ctor: 'Fetch'};
+var _user$project$Main$NoOp = {ctor: 'NoOp'};
+var _user$project$Main$view = function (model) {
+	return A2(
+		_elm_lang$html$Html$form,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Events$onSubmit(_user$project$Main$NoOp)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_user$project$Main$css('form/form.css'),
+				_user$project$Main$css('form/fonts.css'),
+				A2(
+				_elm_lang$html$Html$h1,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text('Aanvraag prijsopgave website')
+					])),
+				_user$project$Main$formOptions(model.formOptions)
+			]));
+};
+var _user$project$Main$main = {
+	main: _elm_lang$html$Html_App$beginnerProgram(
+		{model: _user$project$Main$initmodel, update: _user$project$Main$update, view: _user$project$Main$view})
+};

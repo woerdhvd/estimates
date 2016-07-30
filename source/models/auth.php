@@ -26,19 +26,19 @@ class Auth extends Model
 
   function setUser ($username, $password, $email)
   {
+    echo "here";
     $hash = password_hash($password, PASSWORD_DEFAULT);
     $query = $this->db->prepare(
-      "INSERT INTO auth (username, hash, email)
-       SELECT ?, ?, ? FROM DUAL
-       WHERE NOT EXISTS (SELECT * FROM auth)
+      "INSERT INTO Auth (username, hash, email)
+       VALUES (?, ?, ?)
       "
     );
-    $query->execute([$username, $hash, $email]);
+    echo var_dump($query->execute([$username, $hash, $email]));
   }
 
   function isAuthorized ($username, $password)
   {
-    $result = $this->db->query("SELECT * FROM auth LIMIT 1");
+    $result = $this->db->query("SELECT * FROM Auth LIMIT 1");
     $user = $result->fetch();
 
     $usernameCorrect = $user['username'] == $username;
@@ -50,7 +50,7 @@ class Auth extends Model
   function userExists ()
   {
     $result = $this->db->query(
-      "SELECT count(*) FROM auth LIMIT 1"
+      "SELECT count(*) FROM Auth LIMIT 1"
     );
     if (!$result)
       return false;
