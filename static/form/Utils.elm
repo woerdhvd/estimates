@@ -53,3 +53,9 @@ toCost string =
     Result.withDefault 0 <| String.toFloat string
   else
     Result.withDefault 0 <| String.toFloat <| String.dropLeft 1 string
+
+costInput cost =
+  if cost == 0 then
+    ""
+  else
+    "€" ++ toString cost

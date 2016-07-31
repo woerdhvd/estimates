@@ -4,11 +4,8 @@ import Html exposing (..)
 import Html.App exposing (beginnerProgram)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Debug exposing (log)
-import String
 import Utils exposing (..)
-import FormOption.Model
-import FormOption.View
+import FormOption
 
 
 main =
@@ -23,7 +20,7 @@ main =
 -- model
 
 type alias Model =
-    { formOptions : List FormOption.Model.Model
+    { formOptions : List FormOption.Model
     , uid : Int
     }
 
@@ -43,6 +40,7 @@ type Msg
     | Save
     | AddOption
     | RemoveOption Int
+    | FormOptionMsg FormOption.Msg
     -- | UpdateOrder Id OrderIndex
 
 
@@ -51,7 +49,7 @@ update msg model =
     case msg of
         AddOption ->
           { model
-              | formOptions = model.formOptions ++ [ FormOption.Model.new model.uid  ]
+              | formOptions = model.formOptions ++ [ FormOption.new model.uid ]
               , uid = model.uid + 1
           }
 
@@ -64,16 +62,14 @@ update msg model =
 
 
 -- view
-
-
 view : Model -> Html Msg
 view model =
-    Html.form [ onSubmit NoOp ]
-        [ css "static/styles/form.css"
-        , css "static/styles/fonts.css"
-        , h1 [] [ text "Aanvraag prijsopgave website" ]
-        , FormOption.View.formOptions model.formOptions
-        ]
+  Html.form [ onSubmit NoOp ]
+      [ css "static/styles/form.css"
+      , css "static/styles/fonts.css"
+      , h1 [] [ text "Aanvraag prijsopgave website" ]
+      , Html.App.map (\msg -> FormOptionMsg) (FormOption.formOptionList model.formOptions)
+      ]
 
 
 css href =
