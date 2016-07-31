@@ -7,7 +7,7 @@ type alias Id =
 type alias OrderIndex =
     Int
 
-type alias FormOption =
+type alias Model =
   { id : Id
   , orderIndex : OrderIndex
   , title : String
@@ -21,3 +21,7 @@ type alias SubOption =
   , label : String
   , cost : Int
   }
+
+new : Id -> Model
+new id =
+  Model id 0 "" "" [] 0

@@ -1,7 +1,18 @@
-var _user$project$FormOption_Model$FormOption = F6(
+var _user$project$FormOption_Model$Model = F6(
 	function (a, b, c, d, e, f) {
 		return {id: a, orderIndex: b, title: c, description: d, subOptions: e, cost: f};
 	});
+var _user$project$FormOption_Model$new = function (id) {
+	return A6(
+		_user$project$FormOption_Model$Model,
+		id,
+		0,
+		'',
+		'',
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		0);
+};
 var _user$project$FormOption_Model$SubOption = F3(
 	function (a, b, c) {
 		return {id: a, label: b, cost: c};
