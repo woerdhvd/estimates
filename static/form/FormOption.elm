@@ -2,7 +2,7 @@ module FormOption exposing (..)
 import Html exposing (..)
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Utils exposing (toCost, costInput)
+import Utils exposing (toCost, costInput, uid)
 
 -- MODEL
 type alias Id = Int
@@ -14,6 +14,7 @@ type alias Model =
   , description : String
   , subOptions : List SubOption
   , cost : Float
+  , uid : Int
   }
 
 type alias SubOption =
@@ -24,7 +25,7 @@ type alias SubOption =
 
 new : Model
 new =
-  Model 0 "" "" [] 0
+  Model 0 "" "" [] 0 0
 
 -- UPDATE
 type Msg
@@ -35,26 +36,31 @@ type Msg
   | Remove
 
 update : Msg -> Model -> Model
-update msg formoption =
+update msg model =
   case msg of
     UpdateTitle title ->
-      { formoption | title = title }
+      { model | title = title }
 
     UpdateCost cost ->
-      { formoption | cost = toCost cost }
+      { model | cost = toCost cost }
 
     UpdateDescription description ->
-      { formoption | description = description }
+      { model | description = description }
+
+    AddSubOption ->
+      { model | subOptions = model.subOptions ++ [SubOption model.uid "" 0]
+      , uid = model.uid + 1
+      }
 
     _ ->
-      formoption
+      model
 
 type alias Context super =
   { remove : super
   }
 
 -- VIEW
-formOption context formOption =
+formOption formOption =
   li [ class "form-option" ]
       [ input
           [ class "title"

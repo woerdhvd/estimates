@@ -31,3 +31,12 @@ costInput cost =
     ""
   else
     "€" ++ toString cost
+
+
+-- UID
+uid : List {id : Int} -> Int
+uid list =
+  if List.length list > 0 then
+    1
+  else
+    0

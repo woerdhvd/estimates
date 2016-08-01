@@ -1,3 +1,8 @@
+var _user$project$Utils$uid = function (list) {
+	return (_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$List$length(list),
+		0) > 0) ? 1 : 0;
+};
 var _user$project$Utils$costInput = function (cost) {
 	return _elm_lang$core$Native_Utils.eq(cost, 0) ? '' : A2(
 		_elm_lang$core$Basics_ops['++'],

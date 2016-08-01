@@ -23,7 +23,6 @@ $adminController    = new AdminController($controllerConfig);
 // Router
 $klein              = new \Klein\Klein();
 
-echo $relative;
 /**
  * Redirects
  */
