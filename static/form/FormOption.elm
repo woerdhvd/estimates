@@ -9,8 +9,7 @@ type alias Id = Int
 type alias OrderIndex = Int
 
 type alias Model =
-  { id : Id
-  , orderIndex : OrderIndex
+  { orderIndex : OrderIndex
   , title : String
   , description : String
   , subOptions : List SubOption
@@ -23,9 +22,9 @@ type alias SubOption =
   , cost : Int
   }
 
-new : Id -> Model
-new id =
-  Model id 0 "" "" [] 0
+new : Model
+new =
+  Model 0 "" "" [] 0
 
 -- UPDATE
 type Msg
@@ -33,6 +32,7 @@ type Msg
   | UpdateCost String
   | UpdateDescription String
   | AddSubOption
+  | Remove
 
 update : Msg -> Model -> Model
 update msg formoption =
@@ -49,15 +49,12 @@ update msg formoption =
     _ ->
       formoption
 
+type alias Context super =
+  { remove : super
+  }
+
 -- VIEW
-
-formOptionList formOptions =
-    ul [ id "form-options" ]
-        ((List.map formOption formOptions) ++ [ addOption ])
-
-
-formOption : Model -> Html Msg
-formOption formOption =
+formOption context formOption =
   li [ class "form-option" ]
       [ input
           [ class "title"
@@ -73,7 +70,7 @@ formOption formOption =
           , onInput UpdateCost
           ]
           []
-      -- , button [ class "remove", onClick (RemoveOption option.id) ] [ text "-" ]
+      , button [ class "remove", onClick Remove ] [ text "-" ]
       , button [ class "add-suboption", onClick AddSubOption ] [ text "+" ]
       , textarea
           [ class "description"
@@ -98,7 +95,3 @@ subOption subOption =
             ]
             []
         ]
-
-addOption =
-    div [ class "add-form-option" ]
-        [ text "+" ]

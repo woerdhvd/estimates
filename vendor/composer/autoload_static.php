@@ -6,15 +6,7 @@ namespace Composer\Autoload;
 
 class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
 {
-    public static $files = array (
-        '3b5f08c7f4e8aae370d8036b036e3daf' => __DIR__ . '/..' . '/noodlehaus/dispatch/dispatch.php',
-    );
-
     public static $prefixLengthsPsr4 = array (
-        'P' => 
-        array (
-            'Phroute\\Phroute\\' => 16,
-        ),
         'K' => 
         array (
             'Klein\\' => 6,
@@ -22,10 +14,6 @@ class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
     );
 
     public static $prefixDirsPsr4 = array (
-        'Phroute\\Phroute\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/phroute/phroute/src/Phroute',
-        ),
         'Klein\\' => 
         array (
             0 => __DIR__ . '/..' . '/klein/klein/src/Klein',
@@ -43,7 +31,6 @@ class ComposerStaticInit28499d0f19fdeeae370893126050b6fb
     );
 
     public static $classMap = array (
-        'AltoRouter' => __DIR__ . '/..' . '/altorouter/altorouter/AltoRouter.php',
         'EasyPeasyICS' => __DIR__ . '/..' . '/phpmailer/phpmailer/extras/EasyPeasyICS.php',
         'PHPMailer' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmailer.php',
         'PHPMailerOAuth' => __DIR__ . '/..' . '/phpmailer/phpmailer/class.phpmaileroauth.php',

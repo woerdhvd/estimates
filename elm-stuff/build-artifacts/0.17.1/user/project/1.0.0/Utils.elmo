@@ -1,3 +1,9 @@
+var _user$project$Utils$costInput = function (cost) {
+	return _elm_lang$core$Native_Utils.eq(cost, 0) ? '' : A2(
+		_elm_lang$core$Basics_ops['++'],
+		'€',
+		_elm_lang$core$Basics$toString(cost));
+};
 var _user$project$Utils$toCost = function (string) {
 	return _elm_lang$core$Native_Utils.eq(
 		_elm_lang$core$String$length(string),
@@ -12,50 +18,6 @@ var _user$project$Utils$toCost = function (string) {
 		_elm_lang$core$String$toFloat(
 			A2(_elm_lang$core$String$dropLeft, 1, string))));
 };
-var _user$project$Utils$addSubOption = F2(
-	function (subOption, record) {
-		return _elm_lang$core$Native_Utils.update(
-			record,
-			{
-				subOptions: A2(
-					_elm_lang$core$Basics_ops['++'],
-					record.subOptions,
-					_elm_lang$core$Native_List.fromArray(
-						[subOption]))
-			});
-	});
-var _user$project$Utils$updateFormOptions = F2(
-	function (fn, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				formOptions: fn(model.formOptions)
-			});
-	});
-var _user$project$Utils$updateLabel = F2(
-	function (newLabel, record) {
-		return _elm_lang$core$Native_Utils.update(
-			record,
-			{label: newLabel});
-	});
-var _user$project$Utils$updateCost = F2(
-	function (newCost, record) {
-		return _elm_lang$core$Native_Utils.update(
-			record,
-			{cost: newCost});
-	});
-var _user$project$Utils$updateDescription = F2(
-	function (newDescription, record) {
-		return _elm_lang$core$Native_Utils.update(
-			record,
-			{description: newDescription});
-	});
-var _user$project$Utils$updateTitle = F2(
-	function (newTitle, record) {
-		return _elm_lang$core$Native_Utils.update(
-			record,
-			{title: newTitle});
-	});
 var _user$project$Utils$removeWithId = F2(
 	function (id, list) {
 		return A2(
@@ -66,24 +28,17 @@ var _user$project$Utils$removeWithId = F2(
 			list);
 	});
 var _user$project$Utils$applyIfId = F3(
-	function (fn, id, item) {
-		return _elm_lang$core$Native_Utils.eq(item.id, id) ? fn(item) : item;
+	function (id, fn, item) {
+		return _elm_lang$core$Native_Utils.eq(item.id, id) ? _elm_lang$core$Native_Utils.update(
+			item,
+			{
+				model: fn(item.model)
+			}) : item;
 	});
-var _user$project$Utils$withId = F3(
-	function (fn, id, list) {
+var _user$project$Utils$updateWithId = F3(
+	function (id, fn, list) {
 		return A2(
 			_elm_lang$core$List$map,
-			A2(_user$project$Utils$applyIfId, fn, id),
+			A2(_user$project$Utils$applyIfId, id, fn),
 			list);
 	});
-var _user$project$Utils$updateById = F3(
-	function (fn, optionId, model) {
-		return _elm_lang$core$Native_Utils.update(
-			model,
-			{
-				formOptions: A3(_user$project$Utils$withId, fn, optionId, model.formOptions)
-			});
-	});
-var _user$project$Utils$WithId = function (a) {
-	return {id: a};
-};
