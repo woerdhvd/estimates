@@ -5,7 +5,7 @@ class RedirectController extends Controller
   function redirectUnlessSetup($req, $res)
   {
     if (!$this->auth->userExists() && !strpos($req->uri(), 'setup'))
-      $res->redirect($this->relative . '/setup');
+      $res->redirect('/estimates' . '/setup');
   }
 
   function redirectWhenAlreadySetup($req, $res)

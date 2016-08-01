@@ -5,6 +5,7 @@ class SetupController extends Controller
 {
   function showSetup ($req, $res)
   {
+    echo "hello";
     $this->view->render('admin/setup');
   }
 

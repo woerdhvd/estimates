@@ -1,7 +1,7 @@
 <?php
 
 // Read config
-$config             = parse_ini_file('config/config.ini', true);
+$config             = parse_ini_file('config.ini', true);
 $dbconfig           = $config['database'];
 $relative           = $config['server']['relative'];
 
@@ -23,7 +23,7 @@ $adminController    = new AdminController($controllerConfig);
 // Router
 $klein              = new \Klein\Klein();
 
-
+echo $relative;
 /**
  * Redirects
  */
