@@ -79,9 +79,6 @@ var _user$project$FormOption$update = F2(
 				return model;
 		}
 	});
-var _user$project$FormOption$Context = function (a) {
-	return {remove: a};
-};
 var _user$project$FormOption$Remove = {ctor: 'Remove'};
 var _user$project$FormOption$AddSubOption = {ctor: 'AddSubOption'};
 var _user$project$FormOption$UpdateDescription = function (a) {

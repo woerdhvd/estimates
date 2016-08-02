@@ -1,0 +1,27 @@
+var _user$project$Requests$subOption = A4(
+	_elm_lang$core$Json_Decode$object3,
+	_user$project$FormOption$SubOption,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'id', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'label', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'cost', _elm_lang$core$Json_Decode$float));
+var _user$project$Requests$formOption = A7(
+	_elm_lang$core$Json_Decode$object6,
+	_user$project$FormOption$Model,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'orderIndex', _elm_lang$core$Json_Decode$int),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'title', _elm_lang$core$Json_Decode$string),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'description', _elm_lang$core$Json_Decode$string),
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'subOptions',
+		_elm_lang$core$Json_Decode$list(_user$project$Requests$subOption)),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'cost', _elm_lang$core$Json_Decode$float),
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'uid', _elm_lang$core$Json_Decode$int));
+var _user$project$Requests$formOptions = _elm_lang$core$Json_Decode$list(_user$project$Requests$formOption);
+var _user$project$Requests$getFormOptions = F2(
+	function (failMsg, succeedMsg) {
+		return A3(
+			_elm_lang$core$Task$perform,
+			failMsg,
+			succeedMsg,
+			A2(_evancz$elm_http$Http$get, _user$project$Requests$formOptions, '/estimates/api/formoptions'));
+	});

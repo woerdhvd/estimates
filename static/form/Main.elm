@@ -1,24 +1,25 @@
 module Main exposing (..)
 
+import TimeTravel.Html.App exposing (program)
 import Html exposing (..)
-import Html.App exposing (beginnerProgram)
+import Html.App
 import Html.Events exposing (..)
 import Html.Attributes exposing (..)
-import Utils exposing (..)
 import Dict exposing (Dict)
+import Debug exposing (log)
+import String
 import FormOption
-
+import Requests exposing (getFormOptions)
+import Http
 
 main =
-  beginnerProgram
-    { model = initmodel
+  program
+    { init = init
     , update = update
     , view = view
+    , subscriptions = \_ -> Sub.none
     }
 
-
-
--- MODEL
 type alias Id = Int
 
 type alias Model =
@@ -27,40 +28,51 @@ type alias Model =
   }
 
 
-initmodel : Model
-initmodel =
-  Model Dict.empty 0
+init : (Model, Cmd Msg)
+init =
+  (Model Dict.empty 0) ! [getFormOptions FetchFail FetchSuccess ]
 
 
 
 -- UPDATE
 type Msg
-    = NoOp
-    | Fetch
-    | Save
-    | AddOption
-    | UpdateOption Id FormOption.Msg
-    -- | UpdateOrder Id OrderIndex
+  = NoOp
+  | Fetch
+  | FetchSuccess (List FormOption.Model)
+  | FetchFail Http.Error
+  | Save
+  | AddOption
+  | UpdateOption Id FormOption.Msg
+  -- | UpdateOrder Id OrderIndex
 
+toDict : List a -> Dict Int a
+toDict list =
+  List.indexedMap (,) list
+  |> Dict.fromList
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> (Model, Cmd Msg)
 update msg model =
     case msg of
       AddOption ->
         { model
             | formOptions = Dict.insert model.uid FormOption.new model.formOptions
             , uid = model.uid + 1
-        }
+        } ! []
 
       UpdateOption id subMsg ->
         case subMsg of
           FormOption.Remove ->
-            { model | formOptions = Dict.remove id model.formOptions }
+            { model | formOptions = Dict.remove id model.formOptions } ! []
           _ ->
-            { model | formOptions = Dict.update id (Maybe.map <| FormOption.update subMsg) model.formOptions }
+            { model | formOptions = Dict.update id (Maybe.map <| FormOption.update subMsg) model.formOptions } ! []
+
+      FetchSuccess formOptions ->
+        { model | formOptions = log "hello" <| toDict formOptions
+        , uid = List.length formOptions
+        } ! []
 
       _ ->
-        model
+        model ! []
 
 
 

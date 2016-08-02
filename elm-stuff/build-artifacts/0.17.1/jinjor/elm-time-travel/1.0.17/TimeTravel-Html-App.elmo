@@ -1,0 +1,168 @@
+var _jinjor$elm_time_travel$TimeTravel_Html_App$OptionsWithFlags = F4(
+	function (a, b, c, d) {
+		return {init: a, view: b, update: c, subscriptions: d};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Html_App$UserMsg = function (a) {
+	return {ctor: 'UserMsg', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Html_App$DebuggerMsg = function (a) {
+	return {ctor: 'DebuggerMsg', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Html_App$wrap = F2(
+	function (_p1, _p0) {
+		var _p2 = _p1;
+		var _p12 = _p2.outgoingMsg;
+		var _p3 = _p0;
+		var subscriptions$ = function (model) {
+			var item = _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history);
+			return _elm_lang$core$Platform_Sub$batch(
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$core$Platform_Sub$map,
+						function (c) {
+							return _jinjor$elm_time_travel$TimeTravel_Html_App$UserMsg(
+								{ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: c});
+						},
+						_p3.subscriptions(item.model)),
+						_p2.incomingMsg(
+						function (_p4) {
+							return _jinjor$elm_time_travel$TimeTravel_Html_App$DebuggerMsg(
+								_jinjor$elm_time_travel$TimeTravel_Internal_Model$Receive(_p4));
+						})
+					]));
+		};
+		var view$ = function (model) {
+			return A4(
+				_jinjor$elm_time_travel$TimeTravel_Internal_View$view,
+				function (c) {
+					return _jinjor$elm_time_travel$TimeTravel_Html_App$UserMsg(
+						{ctor: '_Tuple2', _0: _elm_lang$core$Maybe$Nothing, _1: c});
+				},
+				_jinjor$elm_time_travel$TimeTravel_Html_App$DebuggerMsg,
+				_p3.view,
+				model);
+		};
+		var update$ = F2(
+			function (msg, model) {
+				var _p5 = msg;
+				if (_p5.ctor === 'UserMsg') {
+					var _p6 = A4(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateOnIncomingUserMsg,
+						function (_p7) {
+							var _p8 = _p7;
+							return _jinjor$elm_time_travel$TimeTravel_Html_App$UserMsg(
+								{
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Just(_p8._0),
+									_1: _p8._1
+								});
+						},
+						_p3.update,
+						_p5._0,
+						model);
+					var m = _p6._0;
+					var c1 = _p6._1;
+					var _p9 = A2(_jinjor$elm_time_travel$TimeTravel_Internal_Update$updateAfterUserMsg, _p12, m);
+					var m$ = _p9._0;
+					var c2 = _p9._1;
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						m$,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								c1,
+								A2(_elm_lang$core$Platform_Cmd$map, _jinjor$elm_time_travel$TimeTravel_Html_App$DebuggerMsg, c2)
+							]));
+				} else {
+					var _p10 = A3(_jinjor$elm_time_travel$TimeTravel_Internal_Update$update, _p12, _p5._0, model);
+					var m = _p10._0;
+					var c = _p10._1;
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						m,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								A2(_elm_lang$core$Platform_Cmd$map, _jinjor$elm_time_travel$TimeTravel_Html_App$DebuggerMsg, c)
+							]));
+				}
+			});
+		var init$ = function (flags) {
+			var _p11 = _p3.init(flags);
+			var model = _p11._0;
+			var cmd = _p11._1;
+			return A2(
+				_elm_lang$core$Platform_Cmd_ops['!'],
+				_jinjor$elm_time_travel$TimeTravel_Internal_Model$init(model),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$core$Platform_Cmd$map,
+						function (msg) {
+							return _jinjor$elm_time_travel$TimeTravel_Html_App$UserMsg(
+								{
+									ctor: '_Tuple2',
+									_0: _elm_lang$core$Maybe$Just(0),
+									_1: msg
+								});
+						},
+						cmd)
+					]));
+		};
+		return {init: init$, update: update$, view: view$, subscriptions: subscriptions$};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlagsWithOptions = F2(
+	function (options, stuff) {
+		return _elm_lang$html$Html_App$programWithFlags(
+			A2(_jinjor$elm_time_travel$TimeTravel_Html_App$wrap, options, stuff));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Html_App$programWithOptions = F2(
+	function (options, _p13) {
+		var _p14 = _p13;
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlagsWithOptions,
+			options,
+			{
+				init: _elm_lang$core$Basics$always(_p14.init),
+				view: _p14.view,
+				update: _p14.update,
+				subscriptions: _p14.subscriptions
+			});
+	});
+var _jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlags = function (stuff) {
+	return A2(
+		_jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlagsWithOptions,
+		{
+			outgoingMsg: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Cmd$none),
+			incomingMsg: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
+		},
+		stuff);
+};
+var _jinjor$elm_time_travel$TimeTravel_Html_App$beginnerProgram = function (_p15) {
+	var _p16 = _p15;
+	return _jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlags(
+		{
+			init: _elm_lang$core$Basics$always(
+				{ctor: '_Tuple2', _0: _p16.model, _1: _elm_lang$core$Platform_Cmd$none}),
+			view: _p16.view,
+			update: F2(
+				function (msg, model) {
+					return {
+						ctor: '_Tuple2',
+						_0: A2(_p16.update, msg, model),
+						_1: _elm_lang$core$Platform_Cmd$none
+					};
+				}),
+			subscriptions: _elm_lang$core$Basics$always(_elm_lang$core$Platform_Sub$none)
+		});
+};
+var _jinjor$elm_time_travel$TimeTravel_Html_App$program = function (_p17) {
+	var _p18 = _p17;
+	return _jinjor$elm_time_travel$TimeTravel_Html_App$programWithFlags(
+		{
+			init: _elm_lang$core$Basics$always(_p18.init),
+			view: _p18.view,
+			update: _p18.update,
+			subscriptions: _p18.subscriptions
+		});
+};

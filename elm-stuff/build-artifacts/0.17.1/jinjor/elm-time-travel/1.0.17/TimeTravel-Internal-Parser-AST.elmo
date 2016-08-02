@@ -1,0 +1,284 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactId = F2(
+	function (s, ast) {
+		filterByExactId:
+		while (true) {
+			var _p0 = ast;
+			switch (_p0.ctor) {
+				case 'RecordX':
+					var _p1 = _p0._0;
+					return _elm_lang$core$Native_Utils.eq(s, _p1) ? _elm_lang$core$Maybe$Just(ast) : ((_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(s),
+						_elm_lang$core$String$length(_p1)) < 0) ? _elm_lang$core$Maybe$Nothing : A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactIdForList, s, _p0._1));
+				case 'StringLiteralX':
+					return _elm_lang$core$Native_Utils.eq(s, _p0._0) ? _elm_lang$core$Maybe$Just(ast) : _elm_lang$core$Maybe$Nothing;
+				case 'ListLiteralX':
+					var _p2 = _p0._0;
+					return _elm_lang$core$Native_Utils.eq(s, _p2) ? _elm_lang$core$Maybe$Just(ast) : ((_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(s),
+						_elm_lang$core$String$length(_p2)) < 0) ? _elm_lang$core$Maybe$Nothing : A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactIdForList, s, _p0._1));
+				case 'TupleLiteralX':
+					var _p3 = _p0._0;
+					return _elm_lang$core$Native_Utils.eq(s, _p3) ? _elm_lang$core$Maybe$Just(ast) : ((_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(s),
+						_elm_lang$core$String$length(_p3)) < 0) ? _elm_lang$core$Maybe$Nothing : A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactIdForList, s, _p0._1));
+				case 'ValueX':
+					return _elm_lang$core$Native_Utils.eq(s, _p0._0) ? _elm_lang$core$Maybe$Just(ast) : _elm_lang$core$Maybe$Nothing;
+				case 'UnionX':
+					var _p4 = _p0._0;
+					return _elm_lang$core$Native_Utils.eq(s, _p4) ? _elm_lang$core$Maybe$Just(ast) : ((_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$String$length(s),
+						_elm_lang$core$String$length(_p4)) < 0) ? _elm_lang$core$Maybe$Nothing : A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactIdForList, s, _p0._2));
+				default:
+					var _p5 = _p0._0;
+					if (_elm_lang$core$Native_Utils.eq(s, _p5)) {
+						return _elm_lang$core$Maybe$Just(ast);
+					} else {
+						if (_elm_lang$core$Native_Utils.cmp(
+							_elm_lang$core$String$length(s),
+							_elm_lang$core$String$length(_p5)) < 0) {
+							return _elm_lang$core$Maybe$Nothing;
+						} else {
+							var _v1 = s,
+								_v2 = _p0._2;
+							s = _v1;
+							ast = _v2;
+							continue filterByExactId;
+						}
+					}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactIdForList = F2(
+	function (s, list) {
+		filterByExactIdForList:
+		while (true) {
+			var _p6 = list;
+			if (_p6.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p7 = A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactId, s, _p6._0);
+				if (_p7.ctor === 'Nothing') {
+					var _v5 = s,
+						_v6 = _p6._1;
+					s = _v5;
+					list = _v6;
+					continue filterByExactIdForList;
+				} else {
+					return _p7;
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match = F2(
+	function (s, id) {
+		return A2(
+			_elm_lang$core$String$contains,
+			_elm_lang$core$String$toLower(s),
+			_elm_lang$core$String$toLower(id));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById = F2(
+	function (s, ast) {
+		filterById:
+		while (true) {
+			var _p8 = ast;
+			switch (_p8.ctor) {
+				case 'RecordX':
+					var _p9 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p9) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p9, _1: ast}
+						]) : A2(
+						_elm_lang$core$List$concatMap,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById(s),
+						_p8._1);
+				case 'StringLiteralX':
+					var _p10 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p10) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p10, _1: ast}
+						]) : _elm_lang$core$Native_List.fromArray(
+						[]);
+				case 'ListLiteralX':
+					var _p11 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p11) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p11, _1: ast}
+						]) : A2(
+						_elm_lang$core$List$concatMap,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById(s),
+						_p8._1);
+				case 'TupleLiteralX':
+					var _p12 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p12) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p12, _1: ast}
+						]) : A2(
+						_elm_lang$core$List$concatMap,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById(s),
+						_p8._1);
+				case 'ValueX':
+					var _p13 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p13) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p13, _1: ast}
+						]) : _elm_lang$core$Native_List.fromArray(
+						[]);
+				case 'UnionX':
+					var _p14 = _p8._0;
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p14) ? _elm_lang$core$Native_List.fromArray(
+						[
+							{ctor: '_Tuple2', _0: _p14, _1: ast}
+						]) : A2(
+						_elm_lang$core$List$concatMap,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById(s),
+						_p8._2);
+				default:
+					var _p15 = _p8._0;
+					if (A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$match, s, _p15)) {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: _p15, _1: ast}
+							]);
+					} else {
+						var _v8 = s,
+							_v9 = _p8._2;
+						s = _v8;
+						ast = _v9;
+						continue filterById;
+					}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Property = F2(
+	function (a, b) {
+		return {ctor: 'Property', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Union = F2(
+	function (a, b) {
+		return {ctor: 'Union', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Value = function (a) {
+	return {ctor: 'Value', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$TupleLiteral = function (a) {
+	return {ctor: 'TupleLiteral', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ListLiteral = function (a) {
+	return {ctor: 'ListLiteral', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$StringLiteral = function (a) {
+	return {ctor: 'StringLiteral', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Record = function (a) {
+	return {ctor: 'Record', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$PropertyX = F3(
+	function (a, b, c) {
+		return {ctor: 'PropertyX', _0: a, _1: b, _2: c};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$UnionX = F3(
+	function (a, b, c) {
+		return {ctor: 'UnionX', _0: a, _1: b, _2: c};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ValueX = F2(
+	function (a, b) {
+		return {ctor: 'ValueX', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$TupleLiteralX = F2(
+	function (a, b) {
+		return {ctor: 'TupleLiteralX', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ListLiteralX = F2(
+	function (a, b) {
+		return {ctor: 'ListLiteralX', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$StringLiteralX = F2(
+	function (a, b) {
+		return {ctor: 'StringLiteralX', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$RecordX = F2(
+	function (a, b) {
+		return {ctor: 'RecordX', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId = F2(
+	function (id, ast) {
+		var _p16 = ast;
+		switch (_p16.ctor) {
+			case 'Record':
+				return A2(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$RecordX,
+					id,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToList, id, _p16._0));
+			case 'StringLiteral':
+				return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$StringLiteralX, id, _p16._0);
+			case 'ListLiteral':
+				return A2(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ListLiteralX,
+					id,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToListWithIndex, id, _p16._0));
+			case 'TupleLiteral':
+				var _p18 = _p16._0;
+				var _p17 = _p18;
+				if ((_p17.ctor === '::') && (_p17._1.ctor === '[]')) {
+					return A2(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$TupleLiteralX,
+						id,
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToList, id, _p18));
+				} else {
+					return A2(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$TupleLiteralX,
+						id,
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToListWithIndex, id, _p18));
+				}
+			case 'Value':
+				return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ValueX, id, _p16._0);
+			case 'Union':
+				var _p19 = _p16._0;
+				var id$ = A2(
+					_elm_lang$core$Basics_ops['++'],
+					id,
+					A2(_elm_lang$core$Basics_ops['++'], '.', _p19));
+				return A3(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$UnionX,
+					id$,
+					_p19,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToListWithIndex, id$, _p16._1));
+			default:
+				var _p20 = _p16._0;
+				var id$ = A2(
+					_elm_lang$core$Basics_ops['++'],
+					id,
+					A2(_elm_lang$core$Basics_ops['++'], '.', _p20));
+				return A3(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$PropertyX,
+					id$,
+					_p20,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId, id$, _p16._1));
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToList = F2(
+	function (id, list) {
+		return A2(
+			_elm_lang$core$List$map,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId(id),
+			list);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachIdToListWithIndex = F2(
+	function (id, list) {
+		return A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (index, p) {
+					return A2(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId,
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							id,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'.',
+								_elm_lang$core$Basics$toString(index))),
+						p);
+				}),
+			list);
+	});

@@ -1,0 +1,206 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$normalLine = function (s) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$normalLine)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(s)
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$addedLine = function (s) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$addedLine)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(s)
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$deletedLine = function (s) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$deletedLine)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(s)
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$omittedLine = A2(
+	_elm_lang$html$Html$div,
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$omittedLine)
+		]),
+	_elm_lang$core$Native_List.fromArray(
+		[
+			_elm_lang$html$Html$text('...')
+		]));
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$lines = function (s) {
+	return A2(
+		_elm_lang$core$List$filter,
+		F2(
+			function (x, y) {
+				return !_elm_lang$core$Native_Utils.eq(x, y);
+			})(''),
+		_elm_lang$core$String$lines(s));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Omit = {ctor: 'Omit'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$tmpToResult = F4(
+	function (additionalLines, next, tmp, result) {
+		return _elm_lang$core$Native_Utils.eq(
+			result,
+			_elm_lang$core$Native_List.fromArray(
+				[])) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_List.fromArray(
+				[]),
+			_1: A2(
+				_elm_lang$core$List_ops['::'],
+				next,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(_elm_lang$core$List$take, additionalLines, tmp),
+					(_elm_lang$core$Native_Utils.cmp(
+						_elm_lang$core$List$length(tmp),
+						additionalLines) > 0) ? _elm_lang$core$Native_List.fromArray(
+						[_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Omit]) : _elm_lang$core$Native_List.fromArray(
+						[])))
+		} : ((_elm_lang$core$Native_Utils.cmp(
+			_elm_lang$core$List$length(tmp),
+			additionalLines * 2) > 0) ? {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_List.fromArray(
+				[]),
+			_1: A2(
+				_elm_lang$core$List_ops['::'],
+				next,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					A2(_elm_lang$core$List$take, additionalLines, tmp),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						_elm_lang$core$Native_List.fromArray(
+							[_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Omit]),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							A2(
+								_elm_lang$core$List$drop,
+								_elm_lang$core$List$length(tmp) - additionalLines,
+								tmp),
+							result))))
+		} : {
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_List.fromArray(
+				[]),
+			_1: A2(
+				_elm_lang$core$List_ops['::'],
+				next,
+				A2(_elm_lang$core$Basics_ops['++'], tmp, result))
+		});
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Add = function (a) {
+	return {ctor: 'Add', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Delete = function (a) {
+	return {ctor: 'Delete', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Normal = function (a) {
+	return {ctor: 'Normal', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$reduceLines = function (list) {
+	var additionalLines = 2;
+	var _p0 = A3(
+		_elm_lang$core$List$foldr,
+		F2(
+			function (line, _p1) {
+				var _p2 = _p1;
+				var _p5 = _p2._0;
+				var _p4 = _p2._1;
+				var _p3 = line;
+				switch (_p3.ctor) {
+					case 'NoChange':
+						return {
+							ctor: '_Tuple2',
+							_0: A2(
+								_elm_lang$core$List_ops['::'],
+								_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Normal(_p3._0),
+								_p5),
+							_1: _p4
+						};
+					case 'Removed':
+						return A4(
+							_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$tmpToResult,
+							additionalLines,
+							_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Delete(_p3._0),
+							_p5,
+							_p4);
+					default:
+						return A4(
+							_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$tmpToResult,
+							additionalLines,
+							_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Add(_p3._0),
+							_p5,
+							_p4);
+				}
+			}),
+		{
+			ctor: '_Tuple2',
+			_0: _elm_lang$core$Native_List.fromArray(
+				[]),
+			_1: _elm_lang$core$Native_List.fromArray(
+				[])
+		},
+		list);
+	var tmp = _p0._0;
+	var result = _p0._1;
+	return _elm_lang$core$Native_Utils.eq(
+		result,
+		_elm_lang$core$Native_List.fromArray(
+			[])) ? _elm_lang$core$Native_List.fromArray(
+		[]) : ((_elm_lang$core$Native_Utils.cmp(
+		_elm_lang$core$List$length(tmp),
+		additionalLines) > 0) ? A2(
+		_elm_lang$core$List_ops['::'],
+		_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$Omit,
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			A2(
+				_elm_lang$core$List$drop,
+				_elm_lang$core$List$length(tmp) - additionalLines,
+				tmp),
+			result)) : A2(_elm_lang$core$Basics_ops['++'], tmp, result));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$view = function (changes) {
+	var linesView = A2(
+		_elm_lang$core$List$map,
+		function (line) {
+			var _p6 = line;
+			switch (_p6.ctor) {
+				case 'Normal':
+					return _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$normalLine(_p6._0);
+				case 'Delete':
+					return _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$deletedLine(_p6._0);
+				case 'Add':
+					return _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$addedLine(_p6._0);
+				default:
+					return _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$omittedLine;
+			}
+		},
+		_jinjor$elm_time_travel$TimeTravel_Internal_DiffView$reduceLines(changes));
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$diffView)
+			]),
+		linesView);
+};

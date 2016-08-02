@@ -2,6 +2,7 @@ module Utils exposing (..)
 
 import Result
 import String
+import Dict exposing (Dict)
 
 -- UPDATE HELPERS
 applyIfId id fn item =
@@ -40,3 +41,10 @@ uid list =
     1
   else
     0
+
+
+-- DICT
+toDict : List a -> Dict Int a
+toDict list =
+  List.indexedMap (,) list
+  |> Dict.fromList

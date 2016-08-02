@@ -1,0 +1,211 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Update$updateAfterUserMsg = F2(
+	function (save, model) {
+		return A2(
+			_elm_lang$core$Platform_Cmd_ops['!'],
+			model,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$saveSetting, save, model)
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Update$toggleSet = F2(
+	function (a, set) {
+		return A2(
+			A2(_elm_lang$core$Set$member, a, set) ? _elm_lang$core$Set$remove : _elm_lang$core$Set$insert,
+			a,
+			set);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Update$update = F3(
+	function (save, message, model) {
+		var _p0 = message;
+		switch (_p0.ctor) {
+			case 'Receive':
+				var _p2 = _p0._0;
+				if (_elm_lang$core$Native_Utils.eq(_p2.type_, 'load')) {
+					var _p1 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$decodeSettings(_p2.settings);
+					if (_p1.ctor === 'Ok') {
+						return A2(
+							_elm_lang$core$Platform_Cmd_ops['!'],
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{fixedToLeft: _p1._0.fixedToLeft, filter: _p1._0.filter}),
+							_elm_lang$core$Native_List.fromArray(
+								[]));
+					} else {
+						return A2(
+							_elm_lang$core$Debug$log,
+							'err decoding',
+							A2(
+								_elm_lang$core$Platform_Cmd_ops['!'],
+								model,
+								_elm_lang$core$Native_List.fromArray(
+									[])));
+					}
+				} else {
+					return A2(
+						_elm_lang$core$Platform_Cmd_ops['!'],
+						model,
+						_elm_lang$core$Native_List.fromArray(
+							[]));
+				}
+			case 'ToggleSync':
+				var nextSync = _elm_lang$core$Basics$not(model.sync);
+				var newModel = (nextSync ? _jinjor$elm_time_travel$TimeTravel_Internal_Model$futureToHistory : _elm_lang$core$Basics$identity)(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedMsg: nextSync ? _elm_lang$core$Maybe$Nothing : model.selectedMsg,
+								sync: nextSync,
+								showModelDetail: false
+							})));
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'ToggleExpand':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						expand: _elm_lang$core$Basics$not(model.expand)
+					});
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'ToggleFilter':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						filter: A2(
+							_elm_lang$core$List$map,
+							function (_p3) {
+								var _p4 = _p3;
+								var _p6 = _p4._1;
+								var _p5 = _p4._0;
+								return _elm_lang$core$Native_Utils.eq(_p0._0, _p5) ? {
+									ctor: '_Tuple2',
+									_0: _p5,
+									_1: _elm_lang$core$Basics$not(_p6)
+								} : {ctor: '_Tuple2', _0: _p5, _1: _p6};
+							},
+							model.filter)
+					});
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$saveSetting, save, newModel)
+						]));
+			case 'SelectMsg':
+				var newModel = _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyDiff(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyAst(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								selectedMsg: _elm_lang$core$Maybe$Just(_p0._0),
+								sync: false
+							})));
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'Resync':
+				var newModel = _jinjor$elm_time_travel$TimeTravel_Internal_Model$futureToHistory(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{sync: true})));
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'ToggleLayout':
+				var newModel = _elm_lang$core$Native_Utils.update(
+					model,
+					{
+						fixedToLeft: _elm_lang$core$Basics$not(model.fixedToLeft)
+					});
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					newModel,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$saveSetting, save, newModel)
+						]));
+			case 'ToggleModelDetail':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyDiff(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{showModelDetail: _p0._0})),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'ToggleModelTree':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							expandedTree: A2(_jinjor$elm_time_travel$TimeTravel_Internal_Update$toggleSet, _p0._0, model.expandedTree)
+						}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'ToggleMinimize':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$futureToHistory(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync(
+							_elm_lang$core$Native_Utils.update(
+								model,
+								{
+									minimized: _elm_lang$core$Basics$not(model.minimized),
+									sync: true
+								}))),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'InputModelFilter':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{modelFilter: _p0._0}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'SelectModelFilter':
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{modelFilter: _p0._0}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			case 'SelectModelFilterWatch':
+				var _p7 = _p0._0;
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyAstForWatch(
+						_elm_lang$core$Native_Utils.update(
+							model,
+							{
+								modelFilter: _p7,
+								watch: _elm_lang$core$Maybe$Just(_p7)
+							})),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			default:
+				return A2(
+					_elm_lang$core$Platform_Cmd_ops['!'],
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{watch: _elm_lang$core$Maybe$Nothing}),
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+		}
+	});

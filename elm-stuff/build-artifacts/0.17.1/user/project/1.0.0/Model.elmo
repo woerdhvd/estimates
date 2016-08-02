@@ -1,0 +1,5 @@
+var _user$project$Model$Model = F2(
+	function (a, b) {
+		return {formOptions: a, uid: b};
+	});
+var _user$project$Model$initmodel = A2(_user$project$Model$Model, _elm_lang$core$Dict$empty, 0);

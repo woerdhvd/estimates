@@ -19,6 +19,8 @@ $redirectController = new RedirectController($controllerConfig);
 $setupController    = new SetupController($controllerConfig);
 $customerController = new CustomerController($controllerConfig);
 $adminController    = new AdminController($controllerConfig);
+$apiController      = new APIController($controllerConfig);
+
 
 // Router
 $klein              = new \Klein\Klein();
@@ -44,12 +46,19 @@ $klein->respond('GET',  $relative . '/login', [$adminController, 'showLogin']);
 $klein->respond('POST', $relative . '/login', [$adminController, 'handleLogin']);
 $klein->respond('GET',  $relative . '/admin/estimates', [$adminController, 'showEstimates']);
 $klein->respond('GET',  $relative . '/admin/form', [$adminController, 'showForm']);
-$klein->respond('GET', $relative . '/admin/logout', [$adminController, 'handleLogout']);
+$klein->respond('GET',  $relative . '/admin/logout', [$adminController, 'handleLogout']);
+
 
 /**
  * Customer
  */
 $klein->respond('GET',  $relative . '/', [$customerController, 'showForm']);
 $klein->respond('POST', $relative . '/', [$customerController, 'handleFormSubmit']);
+
+/**
+ * API
+ */
+ $klein->respond('GET',  $relative . '/api/formoptions', [$apiController, 'sendFormOptions']);
+ $klein->respond('POST', $relative . '/api/formoptions', [$apiController, 'handleFormOptions']);
 
 $klein->dispatch();

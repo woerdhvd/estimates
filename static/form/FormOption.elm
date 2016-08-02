@@ -20,7 +20,7 @@ type alias Model =
 type alias SubOption =
   { id : Id
   , label : String
-  , cost : Int
+  , cost : Float
   }
 
 new : Model
@@ -55,9 +55,6 @@ update msg model =
     _ ->
       model
 
-type alias Context super =
-  { remove : super
-  }
 
 -- VIEW
 formOption formOption =

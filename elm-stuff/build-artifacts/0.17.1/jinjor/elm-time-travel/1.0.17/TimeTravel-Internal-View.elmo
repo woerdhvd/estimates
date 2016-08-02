@@ -1,0 +1,639 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$detailTab = F3(
+	function (style$, msg, name) {
+		return A4(
+			_jinjor$elm_inline_hover$InlineHover$hover,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabHover,
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(style$),
+					_elm_lang$html$Html_Events$onClick(msg)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(name)
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$filterMapUntilLimitHelp = F4(
+	function (result, limit, f, list) {
+		filterMapUntilLimitHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(limit, 0) < 1) {
+				return result;
+			} else {
+				var _p0 = list;
+				if (_p0.ctor === '[]') {
+					return result;
+				} else {
+					var _p2 = _p0._1;
+					var _p1 = f(_p0._0);
+					if (_p1.ctor === 'Just') {
+						var _v2 = A2(_elm_lang$core$List_ops['::'], _p1._0, result),
+							_v3 = limit - 1,
+							_v4 = f,
+							_v5 = _p2;
+						result = _v2;
+						limit = _v3;
+						f = _v4;
+						list = _v5;
+						continue filterMapUntilLimitHelp;
+					} else {
+						var _v6 = result,
+							_v7 = limit,
+							_v8 = f,
+							_v9 = _p2;
+						result = _v6;
+						limit = _v7;
+						f = _v8;
+						list = _v9;
+						continue filterMapUntilLimitHelp;
+					}
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$filterMapUntilLimit = F3(
+	function (limit, f, list) {
+		return _elm_lang$core$List$reverse(
+			A4(
+				_jinjor$elm_time_travel$TimeTravel_Internal_View$filterMapUntilLimitHelp,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				limit,
+				f,
+				list));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$msgView = F3(
+	function (filterOptions, selectedMsg, _p3) {
+		var _p4 = _p3;
+		var _p10 = _p4.msg;
+		var _p9 = _p4.id;
+		var str = _jinjor$elm_time_travel$TimeTravel_Internal_MsgLike$format(_p10);
+		var visible = _elm_lang$core$Native_Utils.eq(_p10, _jinjor$elm_time_travel$TimeTravel_Internal_MsgLike$Init) || function () {
+			var _p5 = _elm_lang$core$String$words(str);
+			if (_p5.ctor === '::') {
+				return A2(
+					_elm_lang$core$List$any,
+					function (_p6) {
+						var _p7 = _p6;
+						return _elm_lang$core$Native_Utils.eq(_p5._0, _p7._0) && _p7._1;
+					},
+					filterOptions);
+			} else {
+				return false;
+			}
+		}();
+		var selected = function () {
+			var _p8 = selectedMsg;
+			if (_p8.ctor === 'Just') {
+				return _elm_lang$core$Native_Utils.eq(_p8._0, _p9);
+			} else {
+				return false;
+			}
+		}();
+		return visible ? _elm_lang$core$Maybe$Just(
+			{
+				ctor: '_Tuple2',
+				_0: _elm_lang$core$Basics$toString(_p9),
+				_1: A4(
+					_jinjor$elm_inline_hover$InlineHover$hover,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgViewHover(selected),
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgView(selected)),
+							_elm_lang$html$Html_Events$onClick(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectMsg(_p9)),
+							_elm_lang$html$Html_Attributes$title(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(_p9),
+								A2(_elm_lang$core$Basics_ops['++'], ': ', str)))
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_elm_lang$core$Basics$toString(_p9),
+								A2(_elm_lang$core$Basics_ops['++'], ': ', str)))
+						]))
+			}) : _elm_lang$core$Maybe$Nothing;
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$msgListView = F5(
+	function (filterOptions, selectedMsg, items, watchView, detailView) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					detailView,
+					watchView,
+					A3(
+					_elm_lang$html$Html_Keyed$node,
+					'div',
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgListView)
+						]),
+					A3(
+						_jinjor$elm_time_travel$TimeTravel_Internal_View$filterMapUntilLimit,
+						60,
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_View$msgView, filterOptions, selectedMsg),
+						items))
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailTreeEachId = function (id) {
+	var watchLink = A4(
+		_jinjor$elm_inline_hover$InlineHover$hover,
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatchHover,
+		_elm_lang$html$Html$span,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatch),
+				_elm_lang$html$Html_Events$onClick(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectModelFilterWatch(id))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text('watch')
+			]));
+	var filterLink = A4(
+		_jinjor$elm_inline_hover$InlineHover$hover,
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdHover,
+		_elm_lang$html$Html$span,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachId),
+				_elm_lang$html$Html_Events$onClick(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectModelFilter(id))
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html$text(id)
+			]));
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				filterLink,
+				A2(
+				_elm_lang$html$Html$span,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatch)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(' (')
+					])),
+				watchLink,
+				A2(
+				_elm_lang$html$Html$span,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatch)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(')')
+					]))
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailTreeEach = F3(
+	function (expandedTree, maybeId, ast) {
+		var idView = function () {
+			var _p11 = maybeId;
+			if (_p11.ctor === 'Just') {
+				return _jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailTreeEachId(_p11._0);
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEach)
+				]),
+			A2(
+				_elm_lang$core$List_ops['::'],
+				idView,
+				A4(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsHtml,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectModelFilter,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleModelTree,
+					expandedTree,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModel(ast))));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$watchView = function (model) {
+	var _p12 = {
+		ctor: '_Tuple2',
+		_0: model.watch,
+		_1: _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history).lazyModelAst
+	};
+	if ((((_p12.ctor === '_Tuple2') && (_p12._0.ctor === 'Just')) && (_p12._1.ctor === 'Just')) && (_p12._1._0.ctor === 'Ok')) {
+		var _p14 = _p12._0._0;
+		var stopWatchingButton = A4(
+			_jinjor$elm_inline_hover$InlineHover$hover,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$stopWatchingButtonHover,
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$stopWatchingButton),
+					_elm_lang$html$Html_Events$onClick(_jinjor$elm_time_travel$TimeTravel_Internal_Model$StopWatching)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[_jinjor$elm_time_travel$TimeTravel_Internal_Icons$stopWatching]));
+		var treeView = function () {
+			var _p13 = A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactId, _p14, _p12._1._0._0);
+			if (_p13.ctor === 'Just') {
+				return A3(_jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailTreeEach, model.expandedTree, _elm_lang$core$Maybe$Nothing, _p13._0);
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$watchView)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$watchViewHeader)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							A2(_elm_lang$core$Basics_ops['++'], 'Watching ', _p14))
+						])),
+					treeView,
+					stopWatchingButton
+				]));
+	} else {
+		return _elm_lang$html$Html$text('');
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$modelFilterInput = function (modelFilter) {
+	return A2(
+		_elm_lang$html$Html$input,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelFilterInput),
+				_elm_lang$html$Html_Attributes$placeholder('Filter by property'),
+				_elm_lang$html$Html_Attributes$value(modelFilter),
+				_elm_lang$html$Html_Events$onInput(_jinjor$elm_time_travel$TimeTravel_Internal_Model$InputModelFilter)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailView = F5(
+	function (fixedToLeft, modelFilter, expandedTree, lazyModelAst, userModel) {
+		var _p15 = lazyModelAst;
+		if ((_p15.ctor === 'Just') && (_p15._0.ctor === 'Ok')) {
+			var _p19 = _p15._0._0;
+			var filteredAst = function () {
+				if (A2(_elm_lang$core$String$startsWith, '@', modelFilter)) {
+					var _p16 = A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterByExactId, modelFilter, _p19);
+					if (_p16.ctor === 'Just') {
+						return _elm_lang$core$Native_List.fromArray(
+							[
+								{ctor: '_Tuple2', _0: modelFilter, _1: _p16._0}
+							]);
+					} else {
+						return _elm_lang$core$Native_List.fromArray(
+							[]);
+					}
+				} else {
+					return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$filterById, modelFilter, _p19);
+				}
+			}();
+			var trees = A2(
+				_elm_lang$core$List$map,
+				function (_p17) {
+					var _p18 = _p17;
+					return A3(
+						_jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailTreeEach,
+						expandedTree,
+						(!_elm_lang$core$Native_Utils.eq(modelFilter, '')) ? _elm_lang$core$Maybe$Just(_p18._0) : _elm_lang$core$Maybe$Nothing,
+						_p18._1);
+				},
+				filteredAst);
+			var filterInput = _jinjor$elm_time_travel$TimeTravel_Internal_View$modelFilterInput(modelFilter);
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailView(fixedToLeft))
+					]),
+				A2(_elm_lang$core$List_ops['::'], filterInput, trees));
+		} else {
+			return A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelView)
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(
+						_elm_lang$core$Basics$toString(userModel))
+					]));
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$detailView = function (model) {
+	if (_elm_lang$core$Basics$not(model.sync)) {
+		var head = A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailViewHead)
+				]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A3(
+					_jinjor$elm_time_travel$TimeTravel_Internal_View$detailTab,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabModel, model.fixedToLeft, model.showModelDetail),
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleModelDetail(true),
+					'Model'),
+					A3(
+					_jinjor$elm_time_travel$TimeTravel_Internal_View$detailTab,
+					A2(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabDiff,
+						model.fixedToLeft,
+						_elm_lang$core$Basics$not(model.showModelDetail)),
+					_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleModelDetail(false),
+					'Messages and Diff')
+				]));
+		var detailedMsgView = function () {
+			var _p20 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedMsgAst(model);
+			if (_p20.ctor === 'Just') {
+				return A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailedMsgView)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html$text(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(
+								_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModel(_p20._0)))
+						]));
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		var diffView = function () {
+			var _p21 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedItem(model);
+			if (_p21.ctor === 'Just') {
+				var _p22 = _p21._0.lazyDiff;
+				if (_p22.ctor === 'Just') {
+					return _jinjor$elm_time_travel$TimeTravel_Internal_DiffView$view(_p22._0);
+				} else {
+					return _elm_lang$html$Html$text('');
+				}
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		var msgTreeView = function () {
+			var _p23 = {
+				ctor: '_Tuple2',
+				_0: model.selectedMsg,
+				_1: _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedMsgTree(model)
+			};
+			if (((_p23.ctor === '_Tuple2') && (_p23._0.ctor === 'Just')) && (_p23._1.ctor === 'Just')) {
+				return A3(_jinjor$elm_time_travel$TimeTravel_Internal_MsgTreeView$view, _jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectMsg, _p23._0._0, _p23._1._0);
+			} else {
+				return _elm_lang$html$Html$text('');
+			}
+		}();
+		var body = function () {
+			if (model.showModelDetail) {
+				var _p24 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedItem(model);
+				if (_p24.ctor === 'Just') {
+					var _p25 = _p24._0;
+					return A2(
+						_elm_lang$core$List_ops['::'],
+						A5(_jinjor$elm_time_travel$TimeTravel_Internal_View$modelDetailView, model.fixedToLeft, model.modelFilter, model.expandedTree, _p25.lazyModelAst, _p25.model),
+						_elm_lang$core$Native_List.fromArray(
+							[]));
+				} else {
+					return _elm_lang$core$Native_List.fromArray(
+						[]);
+				}
+			} else {
+				return _elm_lang$core$Native_List.fromArray(
+					[msgTreeView, detailedMsgView, diffView]);
+			}
+		}();
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailView, model.fixedToLeft, true))
+				]),
+			A2(_elm_lang$core$List_ops['::'], head, body));
+	} else {
+		return _elm_lang$html$Html$text('');
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$filterItemView = function (_p26) {
+	var _p27 = _p26;
+	var _p28 = _p27._0;
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				A2(
+				_elm_lang$html$Html$label,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A2(
+						_elm_lang$html$Html$input,
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_elm_lang$html$Html_Attributes$type$('checkbox'),
+								_elm_lang$html$Html_Attributes$checked(_p27._1),
+								_elm_lang$html$Html_Events$onClick(
+								_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleFilter(_p28))
+							]),
+						_elm_lang$core$Native_List.fromArray(
+							[])),
+						_elm_lang$html$Html$text(_p28)
+					]))
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$filterView = F2(
+	function (visible, filterOptions) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Styles$filterView(visible))
+				]),
+			A2(
+				_elm_lang$core$List$map,
+				_jinjor$elm_time_travel$TimeTravel_Internal_View$filterItemView,
+				A2(_elm_lang$core$List$sortBy, _elm_lang$core$Basics$fst, filterOptions)));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView = F3(
+	function (onClickMsg, buttonStyle, inner) {
+		return A4(
+			_jinjor$elm_inline_hover$InlineHover$hover,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonHover,
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html_Attributes$style(buttonStyle),
+					_elm_lang$html$Html_Events$onClick(onClickMsg)
+				]),
+			inner);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$headerView = F4(
+	function (fixedToLeft, sync, expand, filterOptions) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html$div,
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$headerView)
+						]),
+					_elm_lang$core$Native_List.fromArray(
+						[
+							A3(
+							_jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleLayout,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonView(true),
+							_elm_lang$core$Native_List.fromArray(
+								[_jinjor$elm_time_travel$TimeTravel_Internal_Icons$layout])),
+							A3(
+							_jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleMinimize,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonView(true),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Icons$minimize(false)
+								])),
+							A3(
+							_jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleSync,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonView(false),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Icons$sync(sync)
+								])),
+							A3(
+							_jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleExpand,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonView(false),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Icons$filterExpand(expand)
+								]))
+						])),
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_View$filterView, expand, filterOptions)
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$resyncView = function (sync) {
+	return sync ? _elm_lang$html$Html$text('') : A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_elm_lang$html$Html_Attributes$style(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Styles$resyncView(sync)),
+				_elm_lang$html$Html_Events$onMouseDown(_jinjor$elm_time_travel$TimeTravel_Internal_Model$Resync)
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$minimizedDebugView = function (model) {
+	return A3(
+		_jinjor$elm_time_travel$TimeTravel_Internal_View$buttonView,
+		_jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleMinimize,
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$minimizedButton(model.fixedToLeft),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_jinjor$elm_time_travel$TimeTravel_Internal_Icons$minimize(true)
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$normalDebugView = function (model) {
+	return A2(
+		_elm_lang$html$Html$div,
+		_elm_lang$core$Native_List.fromArray(
+			[]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				_jinjor$elm_time_travel$TimeTravel_Internal_View$resyncView(model.sync),
+				A2(
+				_elm_lang$html$Html$div,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugView(model.fixedToLeft))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						A4(_jinjor$elm_time_travel$TimeTravel_Internal_View$headerView, model.fixedToLeft, model.sync, model.expand, model.filter),
+						A5(
+						_jinjor$elm_time_travel$TimeTravel_Internal_View$msgListView,
+						model.filter,
+						model.selectedMsg,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(model.history),
+						_jinjor$elm_time_travel$TimeTravel_Internal_View$watchView(model),
+						_jinjor$elm_time_travel$TimeTravel_Internal_View$detailView(model))
+					]))
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$debugView = function (model) {
+	return (model.minimized ? _jinjor$elm_time_travel$TimeTravel_Internal_View$minimizedDebugView : _jinjor$elm_time_travel$TimeTravel_Internal_View$normalDebugView)(model);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$userView = F2(
+	function (userView, model) {
+		var _p29 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedItem(model);
+		if (_p29.ctor === 'Just') {
+			return userView(_p29._0.model);
+		} else {
+			return _elm_lang$html$Html$text('Error: Unable to render');
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_View$view = F4(
+	function (transformUserMsg, transformDebuggerMsg, userViewFunc, model) {
+		return A2(
+			_elm_lang$html$Html$div,
+			_elm_lang$core$Native_List.fromArray(
+				[]),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$html$Html_App$map,
+					transformUserMsg,
+					A2(_jinjor$elm_time_travel$TimeTravel_Internal_View$userView, userViewFunc, model)),
+					A2(
+					_elm_lang$html$Html_App$map,
+					transformDebuggerMsg,
+					_jinjor$elm_time_travel$TimeTravel_Internal_View$debugView(model))
+				]));
+	});

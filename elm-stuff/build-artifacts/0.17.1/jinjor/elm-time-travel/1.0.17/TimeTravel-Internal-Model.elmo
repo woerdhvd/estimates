@@ -1,0 +1,555 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$encodeSetting = function (settings) {
+	return A2(
+		_elm_lang$core$Json_Encode$encode,
+		0,
+		_elm_lang$core$Json_Encode$object(
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{
+					ctor: '_Tuple2',
+					_0: 'fixedToLeft',
+					_1: _elm_lang$core$Json_Encode$bool(settings.fixedToLeft)
+				},
+					{
+					ctor: '_Tuple2',
+					_0: 'filter',
+					_1: _elm_lang$core$Json_Encode$list(
+						A2(
+							_elm_lang$core$List$map,
+							function (_p0) {
+								var _p1 = _p0;
+								return _elm_lang$core$Json_Encode$list(
+									_elm_lang$core$Native_List.fromArray(
+										[
+											_elm_lang$core$Json_Encode$string(_p1._0),
+											_elm_lang$core$Json_Encode$bool(_p1._1)
+										]));
+							},
+							settings.filter))
+				}
+				])));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$saveSetting = F2(
+	function (save, model) {
+		return A2(
+			_elm_lang$core$Platform_Cmd$map,
+			_elm_community$basics_extra$Basics_Extra$never,
+			save(
+				{
+					type_: 'save',
+					settings: _jinjor$elm_time_travel$TimeTravel_Internal_Model$encodeSetting(
+						{fixedToLeft: model.fixedToLeft, filter: model.filter})
+				}));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$msgRootOf = F2(
+	function (id, history) {
+		msgRootOf:
+		while (true) {
+			var _p2 = A2(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$find,
+				function (item) {
+					return _elm_lang$core$Native_Utils.eq(item.id, id);
+				},
+				history);
+			if (_p2.ctor === 'Just') {
+				var _p4 = _p2._0;
+				var _p3 = _p4.causedBy;
+				if (_p3.ctor === 'Just') {
+					var _v3 = _p3._0,
+						_v4 = history;
+					id = _v3;
+					history = _v4;
+					continue msgRootOf;
+				} else {
+					return _elm_lang$core$Maybe$Just(_p4);
+				}
+			} else {
+				return _elm_lang$core$Maybe$Nothing;
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedMsgTree = function (model) {
+	var _p5 = model.selectedMsg;
+	if (_p5.ctor === 'Just') {
+		var _p6 = A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$msgRootOf, _p5._0, model.history);
+		if (_p6.ctor === 'Just') {
+			var f = F2(
+				function (item, tree) {
+					return A3(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Util_RTree$addChildAt,
+						function (i) {
+							return _elm_lang$core$Native_Utils.eq(
+								item.causedBy,
+								_elm_lang$core$Maybe$Just(i.id));
+						},
+						item,
+						tree);
+				});
+			return _elm_lang$core$Maybe$Just(
+				A2(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Util_RTree$sortEachBranchBy,
+					function (item) {
+						return item.id;
+					},
+					A3(
+						_elm_lang$core$List$foldr,
+						f,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Util_RTree$singleton(_p6._0),
+						_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(model.history))));
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync = function (model) {
+	return model.sync ? _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			selectedMsg: _elm_lang$core$Maybe$Just(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history).id)
+		}) : model;
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedAndOldAst = function (model) {
+	var _p7 = model.selectedMsg;
+	if (_p7.ctor === 'Just') {
+		var _p10 = _p7._0;
+		var newAndOld = A3(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapMany,
+			2,
+			function (item) {
+				return (_elm_lang$core$Native_Utils.eq(item.id, _p10) || _elm_lang$core$Native_Utils.eq(item.id, _p10 - 1)) ? _elm_lang$core$Maybe$Just(item.lazyModelAst) : _elm_lang$core$Maybe$Nothing;
+			},
+			model.history);
+		var _p8 = newAndOld;
+		_v8_2:
+		do {
+			if (((_p8.ctor === '::') && (_p8._0.ctor === 'Just')) && (_p8._0._0.ctor === 'Ok')) {
+				if (_p8._1.ctor === '::') {
+					if ((_p8._1._0.ctor === 'Just') && (_p8._1._0._0.ctor === 'Ok')) {
+						return _elm_lang$core$Maybe$Just(
+							{ctor: '_Tuple2', _0: _p8._1._0._0._0, _1: _p8._0._0._0});
+					} else {
+						break _v8_2;
+					}
+				} else {
+					var _p9 = _p8._0._0._0;
+					return _elm_lang$core$Maybe$Just(
+						{ctor: '_Tuple2', _0: _p9, _1: _p9});
+				}
+			} else {
+				break _v8_2;
+			}
+		} while(false);
+		return _elm_lang$core$Maybe$Nothing;
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedMsgAst = function (model) {
+	var _p11 = model.selectedMsg;
+	if (_p11.ctor === 'Just') {
+		var _p12 = A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMap,
+			function (item) {
+				return _elm_lang$core$Native_Utils.eq(item.id, _p11._0) ? _elm_lang$core$Maybe$Just(item.lazyMsgAst) : _elm_lang$core$Maybe$Nothing;
+			},
+			model.history);
+		if (((_p12.ctor === 'Just') && (_p12._0.ctor === 'Just')) && (_p12._0._0.ctor === 'Ok')) {
+			return _elm_lang$core$Maybe$Just(_p12._0._0._0);
+		} else {
+			return _elm_lang$core$Maybe$Nothing;
+		}
+	} else {
+		return _elm_lang$core$Maybe$Nothing;
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$makeChanges = F2(
+	function (oldAst, newAst) {
+		return _elm_lang$core$Native_Utils.eq(oldAst, newAst) ? _elm_lang$core$Native_List.fromArray(
+			[]) : A2(
+			_jinjor$elm_diff$Diff$diffLines,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModel(oldAst)),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModel(newAst)));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyDiffHelp = F2(
+	function (model, item) {
+		var newDiff = function () {
+			var _p13 = item.lazyDiff;
+			if (_p13.ctor === 'Just') {
+				return _elm_lang$core$Maybe$Just(_p13._0);
+			} else {
+				var _p14 = _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedAndOldAst(model);
+				if (_p14.ctor === 'Just') {
+					return _elm_lang$core$Maybe$Just(
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$makeChanges, _p14._0._0, _p14._0._1));
+				} else {
+					return _elm_lang$core$Maybe$Nothing;
+				}
+			}
+		}();
+		return _elm_lang$core$Native_Utils.update(
+			item,
+			{lazyDiff: newDiff});
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyModelAst = function (item) {
+	return _elm_lang$core$Native_Utils.update(
+		item,
+		{
+			lazyModelAst: _elm_lang$core$Native_Utils.eq(item.lazyModelAst, _elm_lang$core$Maybe$Nothing) ? _elm_lang$core$Maybe$Just(
+				A2(
+					_elm_lang$core$Result$map,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId('@'),
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$parse(
+						_elm_lang$core$Basics$toString(item.model)))) : item.lazyModelAst
+		});
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyMsgAst = function (item) {
+	return _elm_lang$core$Native_Utils.update(
+		item,
+		{
+			lazyMsgAst: function () {
+				if (_elm_lang$core$Native_Utils.eq(item.lazyMsgAst, _elm_lang$core$Maybe$Nothing)) {
+					var _p15 = item.msg;
+					switch (_p15.ctor) {
+						case 'Message':
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$core$Result$map,
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId('@'),
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$parse(
+										_elm_lang$core$Basics$toString(_p15._0))));
+						case 'UrlData':
+							return _elm_lang$core$Maybe$Just(
+								A2(
+									_elm_lang$core$Result$map,
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$attachId('@'),
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$parse(
+										_elm_lang$core$Basics$toString(_p15._0))));
+						default:
+							return _elm_lang$core$Maybe$Just(
+								_elm_lang$core$Result$Err(''));
+					}
+				} else {
+					return item.lazyMsgAst;
+				}
+			}()
+		});
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$mapHistory = F2(
+	function (f, model) {
+		return _elm_lang$core$Native_Utils.update(
+			model,
+			{
+				history: A2(_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$map, f, model.history)
+			});
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyAst = function (model) {
+	var _p16 = model.selectedMsg;
+	if (_p16.ctor === 'Just') {
+		var _p18 = _p16._0;
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Model$mapHistory,
+			function (item) {
+				return (_elm_lang$core$Native_Utils.eq(item.id, _p18) || _elm_lang$core$Native_Utils.eq(item.id, _p18 - 1)) ? function (_p17) {
+					return _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyMsgAst(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyModelAst(_p17));
+				}(item) : item;
+			},
+			model);
+	} else {
+		return model;
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyAstForWatch = function (model) {
+	var _p19 = {
+		ctor: '_Tuple2',
+		_0: model.watch,
+		_1: _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history).id
+	};
+	if ((_p19.ctor === '_Tuple2') && (_p19._0.ctor === 'Just')) {
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Model$mapHistory,
+			function (item) {
+				return _elm_lang$core$Native_Utils.eq(item.id, _p19._1) ? _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyModelAst(item) : item;
+			},
+			model);
+	} else {
+		return model;
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyDiff = function (model) {
+	if (model.showModelDetail) {
+		return model;
+	} else {
+		var _p20 = model.selectedMsg;
+		if (_p20.ctor === 'Just') {
+			return A2(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Model$mapHistory,
+				function (item) {
+					return _elm_lang$core$Native_Utils.eq(item.id, _p20._0) ? A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyDiffHelp, model, item) : item;
+				},
+				model);
+		} else {
+			return model;
+		}
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$futureToHistory = function (model) {
+	return _elm_lang$core$Native_Utils.update(
+		model,
+		{
+			future: _elm_lang$core$Native_List.fromArray(
+				[]),
+			history: A2(_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$concat, model.future, model.history)
+		});
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateFilter = F2(
+	function (msgLike, filterOptions) {
+		var str = function () {
+			var _p21 = msgLike;
+			switch (_p21.ctor) {
+				case 'Message':
+					return _elm_lang$core$Basics$toString(_p21._0);
+				case 'UrlData':
+					return '[Nav] ';
+				default:
+					return '';
+			}
+		}();
+		var _p22 = _elm_lang$core$String$words(str);
+		if (_p22.ctor === '::') {
+			var _p25 = _p22._0;
+			var exists = A2(
+				_elm_lang$core$List$any,
+				function (_p23) {
+					var _p24 = _p23;
+					return _elm_lang$core$Native_Utils.eq(_p24._0, _p25);
+				},
+				filterOptions);
+			return exists ? filterOptions : A2(
+				_elm_lang$core$List_ops['::'],
+				{ctor: '_Tuple2', _0: _p25, _1: true},
+				filterOptions);
+		} else {
+			return filterOptions;
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$selectedItem = function (model) {
+	var _p26 = {ctor: '_Tuple2', _0: model.sync, _1: model.selectedMsg};
+	if (_p26._0 === true) {
+		return _elm_lang$core$Maybe$Just(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history));
+	} else {
+		if (_p26._1.ctor === 'Nothing') {
+			return _elm_lang$core$Maybe$Just(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head(model.history));
+		} else {
+			return A2(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$find,
+				function (item) {
+					return _elm_lang$core$Native_Utils.eq(item.id, _p26._1._0);
+				},
+				model.history);
+		}
+	}
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$newItem = F4(
+	function (id, msg, causedBy, model) {
+		return {id: id, msg: msg, causedBy: causedBy, model: model, lazyMsgAst: _elm_lang$core$Maybe$Nothing, lazyModelAst: _elm_lang$core$Maybe$Nothing, lazyDiff: _elm_lang$core$Maybe$Nothing};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$updateOnIncomingUserMsg = F4(
+	function (transformMsg, update, _p27, model) {
+		var _p28 = _p27;
+		var _p31 = _p28._1;
+		var megLike = _jinjor$elm_time_travel$TimeTravel_Internal_MsgLike$Message(_p31);
+		var _p29 = model.history;
+		var last = _p29._0;
+		var past = _p29._1;
+		var _p30 = A2(update, _p31, last.model);
+		var newRawUserModel = _p30._0;
+		var userCmd = _p30._1;
+		var nextItem = A4(_jinjor$elm_time_travel$TimeTravel_Internal_Model$newItem, model.msgId, megLike, _p28._0, newRawUserModel);
+		return A2(
+			_elm_lang$core$Platform_Cmd_ops['!'],
+			_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateLazyAstForWatch(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync(
+					_elm_lang$core$Native_Utils.update(
+						model,
+						{
+							filter: A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateFilter, megLike, model.filter),
+							msgId: model.msgId + 1,
+							future: _elm_lang$core$Basics$not(model.sync) ? A2(_elm_lang$core$List_ops['::'], nextItem, model.future) : model.future,
+							history: model.sync ? A2(_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$cons, nextItem, model.history) : model.history
+						}))),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$core$Platform_Cmd$map,
+					transformMsg,
+					A2(
+						_elm_lang$core$Platform_Cmd$map,
+						F2(
+							function (v0, v1) {
+								return {ctor: '_Tuple2', _0: v0, _1: v1};
+							})(model.msgId),
+						userCmd))
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$urlUpdateOnIncomingData = F4(
+	function (transformMsg, urlUpdate, data, model) {
+		var msgLike = _jinjor$elm_time_travel$TimeTravel_Internal_MsgLike$UrlData(data);
+		var _p32 = model.history;
+		var last = _p32._0;
+		var past = _p32._1;
+		var _p33 = A2(urlUpdate, data, last.model);
+		var newRawUserModel = _p33._0;
+		var userCmd = _p33._1;
+		var nextItem = A4(_jinjor$elm_time_travel$TimeTravel_Internal_Model$newItem, model.msgId, msgLike, _elm_lang$core$Maybe$Nothing, newRawUserModel);
+		return A2(
+			_elm_lang$core$Platform_Cmd_ops['!'],
+			_jinjor$elm_time_travel$TimeTravel_Internal_Model$selectFirstIfSync(
+				_elm_lang$core$Native_Utils.update(
+					model,
+					{
+						filter: A2(_jinjor$elm_time_travel$TimeTravel_Internal_Model$updateFilter, msgLike, model.filter),
+						msgId: model.msgId + 1,
+						future: _elm_lang$core$Basics$not(model.sync) ? A2(_elm_lang$core$List_ops['::'], nextItem, model.future) : model.future,
+						history: model.sync ? A2(_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$cons, nextItem, model.history) : model.history
+					})),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					A2(
+					_elm_lang$core$Platform_Cmd$map,
+					transformMsg,
+					A2(
+						_elm_lang$core$Platform_Cmd$map,
+						F2(
+							function (v0, v1) {
+								return {ctor: '_Tuple2', _0: v0, _1: v1};
+							})(model.msgId),
+						userCmd))
+				]));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$initItem = function (model) {
+	return A4(_jinjor$elm_time_travel$TimeTravel_Internal_Model$newItem, 0, _jinjor$elm_time_travel$TimeTravel_Internal_MsgLike$Init, _elm_lang$core$Maybe$Nothing, model);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$init = function (model) {
+	return {
+		future: _elm_lang$core$Native_List.fromArray(
+			[]),
+		history: A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Model$initItem(model),
+			_elm_lang$core$Native_List.fromArray(
+				[])),
+		filter: _elm_lang$core$Native_List.fromArray(
+			[]),
+		sync: true,
+		showModelDetail: true,
+		expand: false,
+		msgId: 1,
+		selectedMsg: _elm_lang$core$Maybe$Nothing,
+		showDiff: false,
+		fixedToLeft: false,
+		expandedTree: _elm_lang$core$Set$empty,
+		minimized: false,
+		modelFilter: '',
+		watch: _elm_lang$core$Maybe$Nothing
+	};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$HistoryItem = F7(
+	function (a, b, c, d, e, f, g) {
+		return {id: a, msg: b, causedBy: c, model: d, lazyMsgAst: e, lazyModelAst: f, lazyDiff: g};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$Model = function (a) {
+	return function (b) {
+		return function (c) {
+			return function (d) {
+				return function (e) {
+					return function (f) {
+						return function (g) {
+							return function (h) {
+								return function (i) {
+									return function (j) {
+										return function (k) {
+											return function (l) {
+												return function (m) {
+													return function (n) {
+														return {future: a, history: b, filter: c, sync: d, showModelDetail: e, expand: f, msgId: g, selectedMsg: h, showDiff: i, fixedToLeft: j, expandedTree: k, minimized: l, modelFilter: m, watch: n};
+													};
+												};
+											};
+										};
+									};
+								};
+							};
+						};
+					};
+				};
+			};
+		};
+	};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$Settings = F2(
+	function (a, b) {
+		return {fixedToLeft: a, filter: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$settingsDecoder = A3(
+	_elm_lang$core$Json_Decode$object2,
+	_jinjor$elm_time_travel$TimeTravel_Internal_Model$Settings,
+	A2(_elm_lang$core$Json_Decode_ops[':='], 'fixedToLeft', _elm_lang$core$Json_Decode$bool),
+	A2(
+		_elm_lang$core$Json_Decode_ops[':='],
+		'filter',
+		_elm_lang$core$Json_Decode$list(
+			A3(
+				_elm_lang$core$Json_Decode$tuple2,
+				F2(
+					function (v0, v1) {
+						return {ctor: '_Tuple2', _0: v0, _1: v1};
+					}),
+				_elm_lang$core$Json_Decode$string,
+				_elm_lang$core$Json_Decode$bool))));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$decodeSettings = _elm_lang$core$Json_Decode$decodeString(_jinjor$elm_time_travel$TimeTravel_Internal_Model$settingsDecoder);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$OutgoingMsg = F2(
+	function (a, b) {
+		return {type_: a, settings: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$IncomingMsg = F2(
+	function (a, b) {
+		return {type_: a, settings: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$StopWatching = {ctor: 'StopWatching'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectModelFilterWatch = function (a) {
+	return {ctor: 'SelectModelFilterWatch', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectModelFilter = function (a) {
+	return {ctor: 'SelectModelFilter', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$InputModelFilter = function (a) {
+	return {ctor: 'InputModelFilter', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleMinimize = {ctor: 'ToggleMinimize'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleModelTree = function (a) {
+	return {ctor: 'ToggleModelTree', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleModelDetail = function (a) {
+	return {ctor: 'ToggleModelDetail', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$Receive = function (a) {
+	return {ctor: 'Receive', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleLayout = {ctor: 'ToggleLayout'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$Resync = {ctor: 'Resync'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$SelectMsg = function (a) {
+	return {ctor: 'SelectMsg', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleFilter = function (a) {
+	return {ctor: 'ToggleFilter', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleExpand = {ctor: 'ToggleExpand'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Model$ToggleSync = {ctor: 'ToggleSync'};

@@ -1,0 +1,197 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$head = function (_p0) {
+	var _p1 = _p0;
+	return _p1._0;
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$takeHelp = F3(
+	function (result, n, list) {
+		takeHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return result;
+			} else {
+				var _p2 = list;
+				if (_p2.ctor === '[]') {
+					return result;
+				} else {
+					var _v2 = A2(_elm_lang$core$List_ops['::'], _p2._0, result),
+						_v3 = n - 1,
+						_v4 = _p2._1;
+					result = _v2;
+					n = _v3;
+					list = _v4;
+					continue takeHelp;
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapManyHelp = F4(
+	function (result, n, f, list) {
+		findMapManyHelp:
+		while (true) {
+			if (_elm_lang$core$Native_Utils.cmp(n, 0) < 1) {
+				return result;
+			} else {
+				var _p3 = list;
+				if (_p3.ctor === '[]') {
+					return result;
+				} else {
+					var _p5 = _p3._1;
+					var _p4 = f(_p3._0);
+					if (_p4.ctor === 'Just') {
+						var _v7 = A2(_elm_lang$core$List_ops['::'], _p4._0, result),
+							_v8 = n - 1,
+							_v9 = f,
+							_v10 = _p5;
+						result = _v7;
+						n = _v8;
+						f = _v9;
+						list = _v10;
+						continue findMapManyHelp;
+					} else {
+						var _v11 = result,
+							_v12 = n,
+							_v13 = f,
+							_v14 = _p5;
+						result = _v11;
+						n = _v12;
+						f = _v13;
+						list = _v14;
+						continue findMapManyHelp;
+					}
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapHelp = F2(
+	function (f, list) {
+		findMapHelp:
+		while (true) {
+			var _p6 = list;
+			if (_p6.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p7 = f(_p6._0);
+				if (_p7.ctor === 'Nothing') {
+					var _v17 = f,
+						_v18 = _p6._1;
+					f = _v17;
+					list = _v18;
+					continue findMapHelp;
+				} else {
+					return _p7;
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findHelp = F2(
+	function (f, list) {
+		findHelp:
+		while (true) {
+			var _p8 = list;
+			if (_p8.ctor === '[]') {
+				return _elm_lang$core$Maybe$Nothing;
+			} else {
+				var _p9 = _p8._0;
+				if (f(_p9)) {
+					return _elm_lang$core$Maybe$Just(_p9);
+				} else {
+					var _v20 = f,
+						_v21 = _p8._1;
+					f = _v20;
+					list = _v21;
+					continue findHelp;
+				}
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList = function (_p10) {
+	var _p11 = _p10;
+	return A2(_elm_lang$core$List_ops['::'], _p11._0, _p11._1);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$filter = F2(
+	function (match, nel) {
+		return A2(
+			_elm_lang$core$List$filter,
+			match,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$filterMap = F2(
+	function (match, nel) {
+		return A2(
+			_elm_lang$core$List$filterMap,
+			match,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$find = F2(
+	function (f, nel) {
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findHelp,
+			f,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMap = F2(
+	function (f, nel) {
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapHelp,
+			f,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapMany = F3(
+	function (n, f, nel) {
+		return _elm_lang$core$List$reverse(
+			A4(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$findMapManyHelp,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				n,
+				f,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel)));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$take = F2(
+	function (n, nel) {
+		return _elm_lang$core$List$reverse(
+			A3(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$takeHelp,
+				_elm_lang$core$Native_List.fromArray(
+					[]),
+				n,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$toList(nel)));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel = F2(
+	function (a, b) {
+		return {ctor: 'Nel', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$map = F2(
+	function (f, _p12) {
+		var _p13 = _p12;
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel,
+			f(_p13._0),
+			A2(_elm_lang$core$List$map, f, _p13._1));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$concat = F2(
+	function (list, _p14) {
+		var _p15 = _p14;
+		var _p18 = _p15._1;
+		var _p17 = _p15._0;
+		var _p16 = list;
+		if (_p16.ctor === '::') {
+			return A2(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel,
+				_p16._0,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					_p16._1,
+					A2(_elm_lang$core$List_ops['::'], _p17, _p18)));
+		} else {
+			return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel, _p17, _p18);
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$cons = F2(
+	function ($new, _p19) {
+		var _p20 = _p19;
+		return A2(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Util_Nel$Nel,
+			$new,
+			A2(_elm_lang$core$List_ops['::'], _p20._0, _p20._1));
+	});

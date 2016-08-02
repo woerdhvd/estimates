@@ -1,0 +1,450 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabHover = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'background-color', _1: '#555'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailViewHead = _elm_lang$core$Native_List.fromArray(
+	[]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$diffOrModelDetailViewContainer = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'position', _1: 'relative'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$lineBase = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'padding-left', _1: '10px'},
+		{ctor: '_Tuple2', _0: 'white-space', _1: 'pre'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$omittedLine = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$lineBase;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$normalLine = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$lineBase;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$deletedLine = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: 'rgba(255, 100, 100, 0.15)'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$lineBase);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$addedLine = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: 'rgba(100, 255, 100, 0.15)'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$lineBase);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgTreeViewItemRowHover = function (selected) {
+	return selected ? _elm_lang$core$Native_List.fromArray(
+		[]) : _elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: '#555'}
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$subPain = function (fixedToLeft) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			{
+			ctor: '_Tuple2',
+			_0: 'box-shadow',
+			_1: fixedToLeft ? 'rgba(0, 0, 0, 0.15) 6px -3px 6px inset' : 'rgba(0, 0, 0, 0.15) -6px -3px 6px inset'
+		}
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgViewHover = function (selected) {
+	return selected ? _elm_lang$core$Native_List.fromArray(
+		[]) : _elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'background-color', _1: '#555'}
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$itemBackground = function (selected) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			{
+			ctor: '_Tuple2',
+			_0: 'background-color',
+			_1: selected ? 'rgba(0, 0, 0, 0.5)' : ''
+		}
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$stopWatchingButtonHover = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'opacity', _1: '0.5'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$stopWatchingButton = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+		{ctor: '_Tuple2', _0: 'right', _1: '20px'},
+		{ctor: '_Tuple2', _0: 'top', _1: '20px'},
+		{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentToggle = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'white-space', _1: 'pre'},
+		{ctor: '_Tuple2', _0: 'display', _1: 'inline'},
+		{ctor: '_Tuple2', _0: 'background-color', _1: '#777'},
+		{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentToggleExpand = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'position', _1: 'relative'},
+			{ctor: '_Tuple2', _0: 'left', _1: '-16px'},
+			{ctor: '_Tuple2', _0: 'margin-right', _1: '-14px'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentToggle);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagment = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'white-space', _1: 'pre'},
+		{ctor: '_Tuple2', _0: 'display', _1: 'inline'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentLink = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagment);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEach = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'margin-bottom', _1: '20px'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelFilterInput = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'display', _1: 'block'},
+		{ctor: '_Tuple2', _0: 'width', _1: '100%'},
+		{ctor: '_Tuple2', _0: 'padding', _1: '5px 10px'},
+		{ctor: '_Tuple2', _0: 'background-color', _1: 'rgba(0,0,0,0.2)'},
+		{ctor: '_Tuple2', _0: 'margin-bottom', _1: '10px'},
+		{ctor: '_Tuple2', _0: 'border', _1: 'none'},
+		{ctor: '_Tuple2', _0: 'box-shadow', _1: '2px 1px 7px 0px rgba(0,0,0,0.4) inset'},
+		{ctor: '_Tuple2', _0: 'color', _1: '#eee'},
+		{ctor: '_Tuple2', _0: 'font-size', _1: '14px'},
+		{ctor: '_Tuple2', _0: 'width', _1: '100%'},
+		{ctor: '_Tuple2', _0: 'box-sizing', _1: 'border-box'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelViewContainer = _elm_lang$core$Native_List.fromArray(
+	[]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'background-color', _1: '#444'},
+		{ctor: '_Tuple2', _0: 'color', _1: '#eee'},
+		{ctor: '_Tuple2', _0: 'font-family', _1: 'calibri, helvetica, arial, sans-serif'},
+		{ctor: '_Tuple2', _0: 'font-size', _1: '14px'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailView = F2(
+	function (fixedToLeft, opened) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+					{ctor: '_Tuple2', _0: 'width', _1: '320px'},
+					{
+					ctor: '_Tuple2',
+					_0: fixedToLeft ? 'right' : 'left',
+					_1: '-320px'
+				},
+					{ctor: '_Tuple2', _0: 'box-sizing', _1: 'border-box'},
+					{ctor: '_Tuple2', _0: 'height', _1: 'calc(100% - 87px)'}
+				]),
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_jinjor$elm_time_travel$TimeTravel_Internal_Styles$subPain(fixedToLeft),
+				_jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTab = function (active) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'border-radius', _1: '3px 3px 0 0'},
+				{ctor: '_Tuple2', _0: 'height', _1: '30px'},
+				{ctor: '_Tuple2', _0: 'top', _1: '-30px'},
+				{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'},
+				{ctor: '_Tuple2', _0: 'position', _1: 'absolute'},
+				{ctor: '_Tuple2', _0: 'text-align', _1: 'center'},
+				{ctor: '_Tuple2', _0: 'line-height', _1: '30px'}
+			]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			active ? _elm_lang$core$Native_List.fromArray(
+				[]) : _elm_lang$core$Native_List.fromArray(
+				[
+					{ctor: '_Tuple2', _0: 'box-shadow', _1: 'rgba(0, 0, 0, 0.25) 0px -1px 5px inset'}
+				]),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabModel = F2(
+	function (fixedToLeft, active) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{ctor: '_Tuple2', _0: 'width', _1: '130px'},
+					{
+					ctor: '_Tuple2',
+					_0: 'left',
+					_1: fixedToLeft ? '10px' : '0'
+				}
+				]),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTab(active));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTabDiff = F2(
+	function (fixedToLeft, active) {
+		return A2(
+			_elm_lang$core$Basics_ops['++'],
+			_elm_lang$core$Native_List.fromArray(
+				[
+					{ctor: '_Tuple2', _0: 'width', _1: '170px'},
+					{
+					ctor: '_Tuple2',
+					_0: 'left',
+					_1: fixedToLeft ? '150px' : '140px'
+				}
+				]),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailTab(active));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'border-bottom', _1: 'solid 1px #666'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel = function (visible) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			{
+			ctor: '_Tuple2',
+			_0: 'padding',
+			_1: visible ? '20px' : '0 20px'
+		},
+			{ctor: '_Tuple2', _0: 'overflow', _1: 'hidden'}
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$filterView = function (visible) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'background-color', _1: '#333'},
+				{ctor: '_Tuple2', _0: 'transition', _1: 'height ease 0.3s, padding ease 0.3s'},
+				{
+				ctor: '_Tuple2',
+				_0: 'height',
+				_1: visible ? '' : '0'
+			}
+			]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(visible)));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$headerView = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'display', _1: 'flex'},
+			{ctor: '_Tuple2', _0: 'justify-content', _1: 'flex-end'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$subHeaderView = A2(_elm_lang$core$Basics_ops['++'], _jinjor$elm_time_travel$TimeTravel_Internal_Styles$headerView, _jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelView = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'height', _1: '150px'},
+			{ctor: '_Tuple2', _0: 'box-sizing', _1: 'border-box'}
+		]),
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder,
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true)));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$watchView = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'position', _1: 'relative'}
+		]),
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true),
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgListView = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgTreeView = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$detailedMsgView = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'white-space', _1: 'pre'}
+		]),
+	A2(
+		_elm_lang$core$Basics_ops['++'],
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true),
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$panelBorder));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$diffView = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$panel(true);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$pointer = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$iconButton = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'padding', _1: '10px 10px 6px 10px'},
+			{ctor: '_Tuple2', _0: 'border', _1: 'solid 1px #666'},
+			{ctor: '_Tuple2', _0: 'border-radius', _1: '3px'}
+		]),
+	_jinjor$elm_time_travel$TimeTravel_Internal_Styles$pointer);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonView = function (left) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		left ? _elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'margin-right', _1: 'auto'}
+			]) : _elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'margin-left', _1: 'auto'}
+			]),
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$iconButton);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$toggleModelDetailIcon = A2(
+	_elm_lang$core$Basics_ops['++'],
+	_elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'right', _1: '20px'},
+			{ctor: '_Tuple2', _0: 'top', _1: '20px'},
+			{ctor: '_Tuple2', _0: 'position', _1: 'absolute'}
+		]),
+	A2(_elm_lang$core$Basics_ops['++'], _jinjor$elm_time_travel$TimeTravel_Internal_Styles$iconButton, _jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgView = function (selected) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'white-space', _1: 'nowrap'},
+				{ctor: '_Tuple2', _0: 'text-overflow', _1: 'ellipsis'},
+				{ctor: '_Tuple2', _0: 'overflow', _1: 'hidden'}
+			]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$itemBackground(selected),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$pointer));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$msgTreeViewItemRow = function (selected) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'white-space', _1: 'pre'},
+				{ctor: '_Tuple2', _0: 'text-overflow', _1: 'ellipsis'},
+				{ctor: '_Tuple2', _0: 'overflow', _1: 'hidden'}
+			]),
+		A2(
+			_elm_lang$core$Basics_ops['++'],
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$itemBackground(selected),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Styles$pointer));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$buttonHover = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'background-color', _1: '#555'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$button = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'padding', _1: '10px'},
+		{ctor: '_Tuple2', _0: 'border', _1: 'solid 1px #666'},
+		{ctor: '_Tuple2', _0: 'border-radius', _1: '3px'},
+		{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$textLinkHover = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'text-decoration', _1: 'underline'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdHover = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$textLinkHover;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatchHover = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdHover;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentLinkHover = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$textLinkHover;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$darkTextColor = '#999';
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachId = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'color', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$darkTextColor},
+		{ctor: '_Tuple2', _0: 'cursor', _1: 'pointer'}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachIdWatch = _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailTreeEachId;
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$watchViewHeader = _elm_lang$core$Native_List.fromArray(
+	[
+		{ctor: '_Tuple2', _0: 'color', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$darkTextColor}
+	]);
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$zIndex = {modelDetailView: '2147483646', debugView: '2147483646', resyncView: '2147483645'};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugView = function (fixedToLeft) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'position', _1: 'fixed'},
+				{ctor: '_Tuple2', _0: 'width', _1: '250px'},
+				{ctor: '_Tuple2', _0: 'top', _1: '0'},
+				{
+				ctor: '_Tuple2',
+				_0: fixedToLeft ? 'left' : 'right',
+				_1: '0'
+			},
+				{ctor: '_Tuple2', _0: 'bottom', _1: '0'},
+				{ctor: '_Tuple2', _0: 'z-index', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$zIndex.debugView}
+			]),
+		_jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$minimizedButton = function (fixedToLeft) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'position', _1: 'fixed'},
+				{ctor: '_Tuple2', _0: 'bottom', _1: '0'},
+				{
+				ctor: '_Tuple2',
+				_0: fixedToLeft ? 'left' : 'right',
+				_1: '0'
+			},
+				{ctor: '_Tuple2', _0: 'z-index', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$zIndex.debugView}
+			]),
+		A2(_elm_lang$core$Basics_ops['++'], _jinjor$elm_time_travel$TimeTravel_Internal_Styles$iconButton, _jinjor$elm_time_travel$TimeTravel_Internal_Styles$debugViewTheme));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailView = function (fixedToLeft) {
+	return A2(
+		_elm_lang$core$Basics_ops['++'],
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'width', _1: '320px'},
+				{ctor: '_Tuple2', _0: 'z-index', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$zIndex.modelDetailView},
+				{ctor: '_Tuple2', _0: 'box-sizing', _1: 'border-box'},
+				{ctor: '_Tuple2', _0: 'height', _1: '100%'},
+				{ctor: '_Tuple2', _0: 'overflow-y', _1: 'scroll'}
+			]),
+		_elm_lang$core$Native_List.fromArray(
+			[
+				{ctor: '_Tuple2', _0: 'padding', _1: '20px'},
+				{ctor: '_Tuple2', _0: 'overflow-x', _1: 'hidden'},
+				{ctor: '_Tuple2', _0: 'overflow-y', _1: 'scroll'}
+			]));
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Styles$resyncView = function (sync) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			{ctor: '_Tuple2', _0: 'z-index', _1: _jinjor$elm_time_travel$TimeTravel_Internal_Styles$zIndex.resyncView},
+			{ctor: '_Tuple2', _0: 'position', _1: 'fixed'},
+			{ctor: '_Tuple2', _0: 'top', _1: '0'},
+			{ctor: '_Tuple2', _0: 'bottom', _1: '0'},
+			{ctor: '_Tuple2', _0: 'left', _1: '0'},
+			{ctor: '_Tuple2', _0: 'right', _1: '0'},
+			{ctor: '_Tuple2', _0: 'background-color', _1: 'rgba(0, 0, 0, 0.15)'},
+			{
+			ctor: '_Tuple2',
+			_0: 'opacity',
+			_1: sync ? '0' : '1'
+		},
+			{
+			ctor: '_Tuple2',
+			_0: 'pointer-events',
+			_1: sync ? 'none' : ''
+		},
+			{ctor: '_Tuple2', _0: 'transition', _1: 'opacity ease 0.5s'}
+		]);
+};

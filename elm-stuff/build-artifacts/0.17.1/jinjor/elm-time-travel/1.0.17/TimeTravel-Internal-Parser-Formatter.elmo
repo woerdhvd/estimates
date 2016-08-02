@@ -1,0 +1,411 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatHelp = F5(
+	function (formatPlain, formatLink, formatListed, formatLong, model) {
+		var _p0 = model;
+		switch (_p0.ctor) {
+			case 'Plain':
+				return formatPlain(_p0._0);
+			case 'Link':
+				return A2(formatLink, _p0._0, _p0._1);
+			case 'Listed':
+				return formatListed(_p0._0);
+			default:
+				return A3(formatLong, _p0._0, _p0._1, _p0._2);
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatLinkAsHtml = F3(
+	function (selectFilterMsg, id, s) {
+		return _elm_lang$core$Native_List.fromArray(
+			[
+				A4(
+				_jinjor$elm_inline_hover$InlineHover$hover,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentLinkHover,
+				_elm_lang$html$Html$span,
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentLink),
+						_elm_lang$html$Html_Events$onClick(
+						selectFilterMsg(id))
+					]),
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html$text(s)
+					]))
+			]);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatPlainAsHtml = function (s) {
+	return _elm_lang$core$Native_List.fromArray(
+		[
+			A2(
+			_elm_lang$html$Html$span,
+			A2(
+				_elm_lang$core$Basics_ops['++'],
+				_elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagment)
+					]),
+				A2(_elm_lang$core$String$startsWith, '\"', s) ? _elm_lang$core$Native_List.fromArray(
+					[
+						_elm_lang$html$Html_Attributes$title(s)
+					]) : _elm_lang$core$Native_List.fromArray(
+					[])),
+			_elm_lang$core$Native_List.fromArray(
+				[
+					_elm_lang$html$Html$text(s)
+				]))
+		]);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsHtml = F4(
+	function (selectFilterMsg, toggleMsg, expandedTree, model) {
+		return A5(
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatHelp,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatPlainAsHtml,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatLinkAsHtml(selectFilterMsg),
+			function (list) {
+				return A2(
+					_elm_lang$core$List$concatMap,
+					A3(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsHtml, selectFilterMsg, toggleMsg, expandedTree),
+					list);
+			},
+			F3(
+				function (id, alt, children) {
+					return A2(_elm_lang$core$Set$member, id, expandedTree) ? A2(
+						_elm_lang$core$List_ops['::'],
+						A2(
+							_elm_lang$html$Html$span,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentToggleExpand),
+									_elm_lang$html$Html_Events$onClick(
+									toggleMsg(id))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(' - ')
+								])),
+						A2(
+							_elm_lang$core$List$concatMap,
+							A3(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsHtml, selectFilterMsg, toggleMsg, expandedTree),
+							children)) : _elm_lang$core$Native_List.fromArray(
+						[
+							A2(
+							_elm_lang$html$Html$span,
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html_Attributes$style(_jinjor$elm_time_travel$TimeTravel_Internal_Styles$modelDetailFlagmentToggle),
+									_elm_lang$html$Html_Events$onClick(
+									toggleMsg(id))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_elm_lang$html$Html$text(alt)
+								]))
+						]);
+				}),
+			model);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString = function (model) {
+	return A5(
+		_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatHelp,
+		_elm_lang$core$Basics$identity,
+		F2(
+			function (_p1, s) {
+				return s;
+			}),
+		function (_p2) {
+			return A2(
+				_elm_lang$core$String$join,
+				'',
+				A2(_elm_lang$core$List$map, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString, _p2));
+		},
+		F3(
+			function (_p4, _p3, children) {
+				return A2(
+					_elm_lang$core$String$join,
+					'',
+					A2(_elm_lang$core$List$map, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString, children));
+			}),
+		model);
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent = function (context) {
+	return A2(_elm_lang$core$String$repeat, context.nest, '  ');
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Context = F3(
+	function (a, b, c) {
+		return {nest: a, parens: b, wordsLimit: c};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Long = F3(
+	function (a, b, c) {
+		return {ctor: 'Long', _0: a, _1: b, _2: c};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed = function (a) {
+	return {ctor: 'Listed', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Link = F2(
+	function (a, b) {
+		return {ctor: 'Link', _0: a, _1: b};
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain = function (a) {
+	return {ctor: 'Plain', _0: a};
+};
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX = F2(
+	function (s, list) {
+		var _p5 = list;
+		if (_p5.ctor === '[]') {
+			return _elm_lang$core$Native_List.fromArray(
+				[]);
+		} else {
+			if (_p5._1.ctor === '[]') {
+				return _elm_lang$core$Native_List.fromArray(
+					[_p5._0]);
+			} else {
+				return A2(
+					_elm_lang$core$List_ops['::'],
+					_p5._0,
+					A2(
+						_elm_lang$core$List_ops['::'],
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(s),
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX, s, _p5._1)));
+			}
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelFromListLike = F7(
+	function (canFold, id, indent, wordsLimit, start, end, list) {
+		var _p6 = list;
+		if (_p6.ctor === '[]') {
+			return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+				A2(_elm_lang$core$Basics_ops['++'], start, end));
+		} else {
+			var singleLine = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(
+				A2(
+					_elm_lang$core$List_ops['::'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+						A2(_elm_lang$core$Basics_ops['++'], start, ' ')),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX, ', ', list),
+						_elm_lang$core$Native_List.fromArray(
+							[
+								_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+								A2(_elm_lang$core$Basics_ops['++'], ' ', end))
+							]))));
+			var singleLineStr = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(singleLine);
+			var $long = (_elm_lang$core$Native_Utils.cmp(
+				_elm_lang$core$String$length(singleLineStr),
+				wordsLimit) > 0) || A2(_elm_lang$core$String$contains, '\n', singleLineStr);
+			return (((!_elm_lang$core$Native_Utils.eq(indent, '')) && canFold) && $long) ? A3(
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Long,
+				id,
+				A2(
+					_elm_lang$core$Basics_ops['++'],
+					start,
+					A2(_elm_lang$core$Basics_ops['++'], ' .. ', end)),
+				A2(
+					_elm_lang$core$List_ops['::'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+						A2(_elm_lang$core$Basics_ops['++'], start, ' ')),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'\n',
+								A2(_elm_lang$core$Basics_ops['++'], indent, ', ')),
+							list),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+									A2(_elm_lang$core$Basics_ops['++'], '\n', indent))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(end)
+								]))))) : ($long ? _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(
+				A2(
+					_elm_lang$core$List_ops['::'],
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+						A2(_elm_lang$core$Basics_ops['++'], start, ' ')),
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						A2(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'\n',
+								A2(_elm_lang$core$Basics_ops['++'], indent, ', ')),
+							list),
+						A2(
+							_elm_lang$core$Basics_ops['++'],
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+									A2(_elm_lang$core$Basics_ops['++'], '\n', indent))
+								]),
+							_elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(end)
+								]))))) : singleLine);
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext = F2(
+	function (c, ast) {
+		var _p7 = ast;
+		switch (_p7.ctor) {
+			case 'RecordX':
+				return A7(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelFromListLike,
+					true,
+					_p7._0,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(c),
+					c.wordsLimit,
+					'{',
+					'}',
+					A2(
+						_elm_lang$core$List$map,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext(
+							_elm_lang$core$Native_Utils.update(
+								c,
+								{nest: c.nest + 1})),
+						_p7._1));
+			case 'PropertyX':
+				var _p8 = _p7._1;
+				var s = A2(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext,
+					_elm_lang$core$Native_Utils.update(
+						c,
+						{parens: false, nest: c.nest + 1}),
+					_p7._2);
+				var str = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(s);
+				return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(
+					A2(
+						_elm_lang$core$List_ops['::'],
+						A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Link, _p7._0, _p8),
+						A2(
+							_elm_lang$core$List_ops['::'],
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(' = '),
+							(A2(_elm_lang$core$String$contains, '\n', str) || (_elm_lang$core$Native_Utils.cmp(
+								_elm_lang$core$String$length(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										_p8,
+										A2(_elm_lang$core$Basics_ops['++'], ' = ', str))),
+								c.wordsLimit) > 0)) ? _elm_lang$core$Native_List.fromArray(
+								[
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+									A2(
+										_elm_lang$core$Basics_ops['++'],
+										'\n',
+										_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(
+											_elm_lang$core$Native_Utils.update(
+												c,
+												{nest: c.nest + 1})))),
+									s
+								]) : _elm_lang$core$Native_List.fromArray(
+								[s]))));
+			case 'StringLiteralX':
+				return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+					A2(
+						_elm_lang$core$Basics_ops['++'],
+						'\"',
+						A2(_elm_lang$core$Basics_ops['++'], _p7._1, '\"')));
+			case 'ValueX':
+				return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(_p7._1);
+			case 'UnionX':
+				var _p10 = _p7._2;
+				var _p9 = _p7._1;
+				var tailX = A2(
+					_elm_lang$core$List$map,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext(
+						_elm_lang$core$Native_Utils.update(
+							c,
+							{nest: c.nest + 1, parens: true})),
+					_p10);
+				var joinedTailStr = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$formatAsString(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(tailX));
+				var multiLine = A2(_elm_lang$core$String$contains, '\n', joinedTailStr) || (_elm_lang$core$Native_Utils.cmp(
+					_elm_lang$core$String$length(
+						A2(_elm_lang$core$Basics_ops['++'], _p9, joinedTailStr)),
+					c.wordsLimit) > 0);
+				var s = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(
+					multiLine ? A2(
+						_elm_lang$core$List_ops['::'],
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								_p9,
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									'\n',
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(
+										_elm_lang$core$Native_Utils.update(
+											c,
+											{nest: c.nest + 1}))))),
+						A2(
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX,
+							A2(
+								_elm_lang$core$Basics_ops['++'],
+								'\n',
+								_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(
+									_elm_lang$core$Native_Utils.update(
+										c,
+										{nest: c.nest + 1}))),
+							tailX)) : A2(
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$joinX,
+						' ',
+						A2(
+							_elm_lang$core$List_ops['::'],
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(_p9),
+							tailX)));
+				return (_elm_lang$core$Basics$not(
+					_elm_lang$core$List$isEmpty(_p10)) && c.parens) ? _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Listed(
+					_elm_lang$core$Native_List.fromArray(
+						[
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain('('),
+							s,
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$Plain(
+							multiLine ? A2(
+								_elm_lang$core$Basics_ops['++'],
+								'\n',
+								A2(
+									_elm_lang$core$Basics_ops['++'],
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(c),
+									')')) : ')')
+						])) : s;
+			case 'ListLiteralX':
+				return A7(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelFromListLike,
+					true,
+					_p7._0,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(c),
+					c.wordsLimit,
+					'[',
+					']',
+					A2(
+						_elm_lang$core$List$map,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext(
+							_elm_lang$core$Native_Utils.update(
+								c,
+								{parens: false, nest: c.nest + 1})),
+						_p7._1));
+			default:
+				return A7(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelFromListLike,
+					false,
+					_p7._0,
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$indent(c),
+					c.wordsLimit,
+					'(',
+					')',
+					A2(
+						_elm_lang$core$List$map,
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext(
+							_elm_lang$core$Native_Utils.update(
+								c,
+								{parens: false, nest: c.nest + 1})),
+						_p7._1));
+		}
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModel = _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Formatter$makeModelWithContext(
+	{nest: 0, parens: false, wordsLimit: 40});

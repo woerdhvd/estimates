@@ -1,0 +1,156 @@
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$propertyKey = _Bogdanp$elm_combine$Combine$regex('[^ ]+');
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$tag = _Bogdanp$elm_combine$Combine$regex('[A-Z][a-zA-Z0-9_.]*');
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$singleUnion = _Bogdanp$elm_combine$Combine$rec(
+	function (_p0) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$map,
+			function (tag) {
+				return A2(
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Union,
+					tag,
+					_elm_lang$core$Native_List.fromArray(
+						[]));
+			},
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$tag);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$null = A2(
+	_Bogdanp$elm_combine$Combine$map,
+	_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Value,
+	_Bogdanp$elm_combine$Combine$regex('[a-z]+'));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$internalStructure = A2(
+	_Bogdanp$elm_combine$Combine$map,
+	_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Value,
+	_Bogdanp$elm_combine$Combine$regex('<[^>]*>'));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$numberLiteral = A2(
+	_Bogdanp$elm_combine$Combine$map,
+	_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Value,
+	_Bogdanp$elm_combine$Combine$regex('(\\-)?[0-9][0-9.]*'));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$stringLiteral = A2(
+	_Bogdanp$elm_combine$Combine$map,
+	_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$StringLiteral,
+	A3(
+		_Bogdanp$elm_combine$Combine$between,
+		_Bogdanp$elm_combine$Combine$string('\"'),
+		_Bogdanp$elm_combine$Combine$string('\"'),
+		_Bogdanp$elm_combine$Combine$regex('(\\\\\"|[^\"])*')));
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expression = _Bogdanp$elm_combine$Combine$rec(
+	function (_p1) {
+		return A2(_Bogdanp$elm_combine$Combine$or, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$union, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expressionWithoutUnion);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expressionWithoutUnion = _Bogdanp$elm_combine$Combine$rec(
+	function (_p2) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$or,
+			A2(
+				_Bogdanp$elm_combine$Combine$or,
+				A2(
+					_Bogdanp$elm_combine$Combine$or,
+					A2(
+						_Bogdanp$elm_combine$Combine$or,
+						A2(
+							_Bogdanp$elm_combine$Combine$or,
+							A2(_Bogdanp$elm_combine$Combine$or, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$record, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$listLiteral),
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$tupleLiteral),
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$internalStructure),
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$stringLiteral),
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$numberLiteral),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$null);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$listLiteral = _Bogdanp$elm_combine$Combine$rec(
+	function (_p3) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$map,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$ListLiteral,
+			_Bogdanp$elm_combine$Combine$brackets(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$items));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$items = _Bogdanp$elm_combine$Combine$rec(
+	function (_p4) {
+		return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaced(
+			A2(
+				_Bogdanp$elm_combine$Combine$sepBy,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$comma,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaced(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expression)));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$record = _Bogdanp$elm_combine$Combine$rec(
+	function (_p5) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$map,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Record,
+			_Bogdanp$elm_combine$Combine$braces(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$properties));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$properties = _Bogdanp$elm_combine$Combine$rec(
+	function (_p6) {
+		return _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaced(
+			A2(_Bogdanp$elm_combine$Combine$sepBy, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$comma, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$property));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$property = _Bogdanp$elm_combine$Combine$rec(
+	function (_p7) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$andMap,
+				A2(
+					_Bogdanp$elm_combine$Combine$andMap,
+					A2(
+						_Bogdanp$elm_combine$Combine$andMap,
+						A2(
+							_Bogdanp$elm_combine$Combine$andMap,
+							A2(
+								_Bogdanp$elm_combine$Combine$andMap,
+								A2(
+									_Bogdanp$elm_combine$Combine$map,
+									F7(
+										function (_p12, key, _p11, _p10, _p9, value, _p8) {
+											return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Property, key, value);
+										}),
+									_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces),
+								_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$propertyKey),
+							_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces),
+						_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$equal),
+					_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces),
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expression),
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces);
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$tupleLiteral = _Bogdanp$elm_combine$Combine$rec(
+	function (_p13) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$map,
+			_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$TupleLiteral,
+			_Bogdanp$elm_combine$Combine$parens(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$items));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$union = _Bogdanp$elm_combine$Combine$rec(
+	function (_p14) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$map,
+				F2(
+					function (tag, tail) {
+						return A2(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_AST$Union, tag, tail);
+					}),
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$tag),
+			_Bogdanp$elm_combine$Combine$many(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$unionParam));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$unionParam = _Bogdanp$elm_combine$Combine$rec(
+	function (_p15) {
+		return A2(
+			_Bogdanp$elm_combine$Combine$andMap,
+			A2(
+				_Bogdanp$elm_combine$Combine$map,
+				F2(
+					function (_p16, exp) {
+						return exp;
+					}),
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces),
+			A2(_Bogdanp$elm_combine$Combine$or, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$singleUnion, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expressionWithoutUnion));
+	});
+var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$parse = function (s) {
+	return A2(
+		_elm_lang$core$Result$formatError,
+		_elm_lang$core$String$join(','),
+		_elm_lang$core$Basics$fst(
+			A2(
+				_Bogdanp$elm_combine$Combine$parse,
+				_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaced(_jinjor$elm_time_travel$TimeTravel_Internal_Parser_Parser$expression),
+				s)));
+};

@@ -22,6 +22,8 @@ require_once 'source/controllers/RedirectController.php';
 require_once 'source/controllers/SetupController.php';
 require_once 'source/controllers/CustomerController.php';
 require_once 'source/controllers/AdminController.php';
+require_once 'source/controllers/APIController.php';
+
 
 // Routes
 require_once 'source/routes.php';

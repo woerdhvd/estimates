@@ -1,3 +1,13 @@
+var _user$project$Utils$toDict = function (list) {
+	return _elm_lang$core$Dict$fromList(
+		A2(
+			_elm_lang$core$List$indexedMap,
+			F2(
+				function (v0, v1) {
+					return {ctor: '_Tuple2', _0: v0, _1: v1};
+				}),
+			list));
+};
 var _user$project$Utils$uid = function (list) {
 	return (_elm_lang$core$Native_Utils.cmp(
 		_elm_lang$core$List$length(list),
