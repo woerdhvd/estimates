@@ -2,10 +2,11 @@
  * A single form option.
  * Order will be determined by array index
  */
-export function FormOption ()
+export function FormOption (order)
 {
-		this.cost = 0
+		this.order = order
 		this.name = ""
+		this.cost = 0
 		this.description = ""
 		this.subOptions = []
 }
@@ -21,10 +22,3 @@ export function SubOption (_id)
 }
 
 export const FormOptions = new Mongo.Collection('formoptions')
-
-export const fixtures =
-[
-	new FormOption(),
-	new FormOption(),
-	new FormOption()
-]

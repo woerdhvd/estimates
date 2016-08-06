@@ -217,3 +217,12 @@ textarea[name="notes"] {
 	min-height: 150px;
 	padding: 10px;
 }
+
+/**
+ * Drag and Drop
+ */
+.sortable-placeholder {
+	height: 150px;
+	border: 1px dashed rgb(0, 163, 255);
+	list-style: none;
+}

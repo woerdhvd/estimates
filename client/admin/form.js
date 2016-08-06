@@ -1,28 +1,49 @@
 import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating'
 
-import 'nestedSortable'
+import sortable from 'html5sortable'
 import { SubOption, FormOption, FormOptions } from '../../collections/FormOptions'
 import { uid, updateProperty } from '../../utils'
 
+function reload ()
+{
+	sortable('#form-options')[0].addEventListener('sortupdate', updateOrder)
+}
+
+function updateOrder ({detail})
+{
+	console.log(detail)
+	Meteor.call('swapOrder', detail.index, detail.oldindex)
+}
+
 Template.form.rendered = function () {
-	$('#form-options').sortable({items: 'li'})
+	reload()
 }
 
 Template.form.helpers({
-	formoptions: _ => FormOptions.find().fetch()
+	formoptions: _ => FormOptions.find({}, {sort: {order: 1}})
 })
 
 
 Template.form.events({
+
+	/**
+	 * Add/Remove
+	 */
 	'click .new' () {
-		FormOptions.insert(new FormOption())
+		FormOptions.insert(new FormOption(FormOptions.find().count()))
+		reload()
 	},
 
-	'sort .form-option' (e) {
-		console.log(e)
+	'click .remove' (e) {
+		let id         = $(e.target).parent().attr("data-id")
+		FormOptions.remove(id)
+		reload()
 	},
 
+	/**
+	 * Update
+	 */
 	'keyup .form-option > input, keyup .form-option > textarea' (e, t) {
 		let id         = $(e.target).parent().attr("data-id")
 		let key        = $(e.target).attr("class")
@@ -33,6 +54,20 @@ Template.form.events({
 		FormOptions.update(id, {$set: {[key]: value}})
 	},
 
+
+	/**
+	 * SubOption Add/Remove
+	 */
+	'click .add-suboption' (e) {
+		let id         = $(e.target).parent().attr("data-id")
+		let subId      = uid(FormOptions.findOne(id).subOptions)
+		FormOptions.update(id, {$push: {subOptions: new SubOption(subId)}})
+	},
+
+
+	/**
+	 * SubOption Update
+	 */
 	'keyup .sub-option > input' (e, t) {
 		let id         = $(e.target).closest('.form-option').attr("data-id")
 		let subId      = $(e.target).closest('.sub-option').attr("data-id")
@@ -45,20 +80,5 @@ Template.form.events({
 		let updated    = updateProperty(subId, key, value, subOptions)
 
 		FormOptions.update(id, {$set: {subOptions: updated}})
-	},
-
-	'click .remove' (e) {
-		let id         = $(e.target).parent().attr("data-id")
-		FormOptions.remove(id)
-	},
-
-	'click .add-suboption' (e) {
-		let id         = $(e.target).parent().attr("data-id")
-		let subId      = uid(FormOptions.findOne(id).subOptions)
-		FormOptions.update(id, {$push: {subOptions: new SubOption(subId)}})
 	}
-
-
-	// Reorder
-
 })
