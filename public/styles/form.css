@@ -5,12 +5,16 @@
 }*/
 /* /Test */
 
+* {
+	box-sizing: border-box;
+}
+
 form {
 	height: 100%;
 	background-color: white;
-	max-width: 800px;
+	max-width: 700px;
 	margin: 0 auto;
-	padding: 50px;
+	padding: 25px;
 	color: rgba(0, 0, 0, 0.8);
 }
 
@@ -40,25 +44,26 @@ form h1 {
 /**
  * Form options
  */
+
+
+
 #form-options {
 	padding: 0;
 }
 
 .form-option {
+	background-color: white;
 	list-style: none;
 	padding: 20px;
-	margin-bottom: 20px;
 	position: relative;
 }
 
-.form-option .name, .form-option .description {
-	width: 100%;
-	text-indent: 5px;
+.form-option > .name, .form-option > .description {
 	outline: none;
 	color: rgba(0, 0, 0, 0.8);
 }
 
-.form-option .name {
+.form-option > .name {
 	width: 75%;
 	font-size: 18px;
 	border: none;
@@ -68,12 +73,16 @@ form h1 {
 	display: block;
 }
 
+.form-option > .name.wide {
+	width: 100%;
+}
+
 .euro {
 	display: inline-block;
 	height: 30px;
 }
 
-.form-option .name, .form-option .cost {
+.form-option > .name, .form-option > .cost {
 	font-size: 18px;
 	border: none;
 	margin: 0;
@@ -84,12 +93,12 @@ form h1 {
 
 
 
-.form-option .cost {
+.form-option > .cost {
 	width: 20%;
 	float: right;
 }
 
-.form-option .name:focus, .form-option .description:focus, .form-option .cost:focus {
+.form-option > .name:focus, .form-option > .description:focus, .form-option > .cost:focus {
 	border-color: rgb(0, 163, 255);
 	outline: none;
 }
@@ -116,13 +125,13 @@ form h1 {
 	cursor: pointer;
 }
 
-.form-option .description {
-	padding: 10px 5px;
+.form-option > .description {
+	padding: 5px 10px;
 	resize: vertical;
 	min-height: 100px;
 	border: none;
-	border-left: 1px solid rgb(231, 231, 231);
 	font-size: 15px;
+	width: 100%;
 }
 
 .new {
@@ -149,11 +158,62 @@ form h1 {
 
 .sub-options {
 	padding: 0 20px;
-	list-style: square;
+	list-style: none;
 }
 
-.sub-option input {
+.sub-option > input {
+	outline: none;
 	border: none;
 	padding: 5px;
 	border-bottom: 1px solid lightgrey;
+}
+
+.sub-option > input:focus {
+	border-bottom: 1px solid rgb(0, 163, 255);
+}
+
+
+/**
+ * Button
+ */
+form button[type="submit"] {
+	float: right;
+	background: none;
+	padding: 5px 10px;
+	border: 1px solid black;
+	margin-right: 25px;
+}
+
+form button[type="submit"]:hover {
+	background-color: black;
+	color: white;
+	cursor: pointer;
+}
+
+/**
+ * Additional customer information
+ */
+form > input, h3:not(.name) {
+	display: block;
+	padding: 5px 10px;
+	margin-bottom: 10px;
+	margin-left: 25px;
+	margin-right: 25px;
+}
+
+form > h3:not(.name) {
+	padding-left: 0;
+}
+
+.notes-container {
+	width: 100%;
+	padding: 0 25px;
+}
+
+textarea[name="notes"] {
+	width: calc(100% - 50px);
+	margin-left: 25px;
+	margin-bottom: 20px;
+	min-height: 150px;
+	padding: 10px;
 }

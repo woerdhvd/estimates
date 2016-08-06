@@ -1,3 +1,44 @@
 <template name="customer">
-    Customer
+	<link rel="stylesheet" href="/styles/form.css">
+	<link rel="stylesheet" href="/styles/fonts.css">
+	<div class="container">
+		<form>
+			<h1>Aanvraag prijsopgave website</h1>
+
+			<h3>Contact informatie</h3>
+			<input name="email" type="text" placeholder="E-mail">
+			<input name="name"  type="text" placeholder="Volledige naam">
+
+			<ul id="form-options">
+			{{#each formoptions}}
+
+				<li class="form-option">
+
+					<h3 class="name wide">
+						<input type="checkbox" value="{{_id}}" name="{{name}}">
+						{{name}}
+					</h3>
+
+					<p class="description">
+						{{description}}
+					</p>
+
+					<ul class="sub-options">
+						{{#each subOptions}}
+							<li class="sub-option">
+								<input type="checkbox" value="{{_id}}" name="{{name}}">
+								{{name}}
+							</li>
+						{{/each}}
+					</ul>
+				</li>
+
+			{{/each}}
+			</ul>
+
+			<textarea name="notes" placeholder="Opmerkingen"></textarea>
+			<button type="submit">Verzenden</button>
+
+		</form>
+	</div>
 </template>

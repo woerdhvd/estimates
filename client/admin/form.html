@@ -9,14 +9,16 @@
 					<span 		class="euro">€</span>
 					<input 		class="cost" 	     	placeholder="Prijs" 	value="{{cost}}"/>
 					<textarea class="description" placeholder="Beschrijving">{{description}}</textarea>
+
 					<a class="add-suboption">+</a>
 					<a class="remove">-</a>
+
 					<ul class="sub-options">
 						{{#each subOptions}}
 
-							<li class="sub-option">
-								<input value="{{name}}" placeholder="name">
-								<input value="{{cost}}" placeholder="cost">
+							<li class="sub-option" data-id="{{_id}}">
+								<input class="name" value="{{name}}" placeholder="name">
+								<input class="cost" value="{{cost}}" placeholder="cost">
 							</li>
 
 						{{/each}}

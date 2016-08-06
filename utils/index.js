@@ -32,3 +32,56 @@ export function uid (array)
 	const uid = Number(max) + 1
 	return uid.toString()
 }
+
+
+/**
+ * Updates a property of an object in an array
+ */
+export function updateProperty (id, key, value, array)
+{
+	return array.map(item => item._id == id ? {...item, [key]: value} : item)
+}
+
+/**
+ * Process form values
+ */
+export function filterObject (filter, object)
+{
+	const remainingKeys = Object.keys(object).filter((key) => filter(key, object[key]))
+	return remainingKeys.reduce((sum, key) => Object.assign(sum, {[key]: object[key]}), {})
+}
+
+export function processForm (fields, collection)
+{
+	const formOptions = _.values(filterObject(isFormOption, fields))
+	const other				= filterObject(isOther, fields)
+
+	return {...other, formOptions}
+}
+
+
+function isFormOption (field)
+{
+	if (field != 'name' && field != 'email' && field != 'notes')
+		return true
+	else
+		return false
+}
+
+function isOther (field)
+{
+	return !isFormOption(field)
+}
+
+function isOn (_, value)
+{
+	return value == 'on'
+}
+
+/**
+ * Filter sub-options
+ */
+export function filterSubOptions (checkedIds, formOptionsFromDB)
+{
+	return formOptionsFromDB.map(fo => Object.assign(fo, {subOptions: fo.subOptions.filter(so => checkedIds.includes(so._id))}))
+}
