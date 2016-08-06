@@ -1,3 +1,21 @@
 <template name="estimates">
-    Estimates
+	<link rel="stylesheet" href="/styles/estimates.css">
+
+	<main id="estimates">
+
+		{{#each estimates}}
+
+			<article data-id="{{_id}}">
+				<section class="customer">
+					<h3 class="name">{{name}}</h3>
+					<p class="email">{{email}}</p>
+				</section>
+				<p class="estimated-cost">
+					Geschatte kosten: <span>€{{estimatedCost formoptions}}</span>
+				</p>
+			</article>
+
+		{{/each}}
+
+	</main>
 </template>

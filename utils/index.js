@@ -85,3 +85,16 @@ export function filterSubOptions (checkedIds, formOptionsFromDB)
 {
 	return formOptionsFromDB.map(fo => Object.assign(fo, {subOptions: fo.subOptions.filter(so => checkedIds.includes(so._id))}))
 }
+
+
+/**
+ * Cost calculation
+ */
+export function calculateCost (formOptions)
+{
+	return formOptions.reduce((sum, formOption) => {
+		return sum + formOption.cost + formOption.subOptions.reduce((sum, subOption) => {
+			return sum + subOption.cost
+		}, 0)
+	}, 0)
+}

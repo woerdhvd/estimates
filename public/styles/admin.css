@@ -1,48 +1,55 @@
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+html {
+	height: 100%;
 }
 
 body {
-  margin: 25px;
+	padding: 25px;
+	margin: 0;
+	height: 100%;
 }
 
 .container {
-  background-color: rgb(246, 246, 246);
-  height: 100%;
-  padding: 20px;
-  padding-top:70px;
-  position: relative;
+	background-color: rgb(246, 246, 246);
+	min-height: 100%;
+	padding: 20px;
+	padding-top: 70px;
+	position: relative;
+	margin-bottom: 20px;
 }
 
 nav {
-  background-color: rgba(0, 0, 0, 0.8);
-  height: 50px;
-  display: flex;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	height: 50px;
+	display: flex;
+	align-items: center;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
 }
 
 nav a {
-  height: 100%;
-  margin: 0 20px;
-  padding: 0 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-decoration: none;
-  color: white;
-  opacity: 0.9;
-  border: 2px solid rgba(0, 0, 0, 0);
+	height: 100%;
+	margin: 0 20px;
+	padding: 0 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	text-decoration: none;
+	color: white;
+	opacity: 0.9;
+	border: 2px solid rgba(0, 0, 0, 0);
 }
 
 nav a:hover {
-  opacity: 1;
-  border-bottom: 2px solid white;
+	opacity: 1;
+	border-bottom: 2px solid white;
 }
 
 nav a#logout {
-  margin-left: auto;
+	margin-left: auto;
 }

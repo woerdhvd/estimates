@@ -5,20 +5,23 @@ import sortable from 'html5sortable'
 import { SubOption, FormOption, FormOptions } from '../../collections/FormOptions'
 import { uid, updateProperty } from '../../utils'
 
+
+/**
+ * Reorder FormOptions
+ */
+
 function reload ()
 {
 	sortable('#form-options')[0].addEventListener('sortupdate', updateOrder)
 }
 
+
 function updateOrder ({detail})
 {
-	console.log(detail)
 	Meteor.call('swapOrder', detail.index, detail.oldindex)
 }
 
-Template.form.rendered = function () {
-	reload()
-}
+Template.form.rendered = reload
 
 Template.form.helpers({
 	formoptions: _ => FormOptions.find({}, {sort: {order: 1}})

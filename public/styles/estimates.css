@@ -1,0 +1,49 @@
+main#estimates {
+	margin: auto;
+	min-height: 100%;
+	display: flex;
+	justify-content: space-around;;
+	align-content: flex-start;
+	flex-wrap: wrap;
+}
+
+article {
+	border: 1px solid white;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	flex-direction: column;
+	height: 175px;
+	width: 260px;
+	flex-grow: 0.5;
+	flex-shrink: 0.8;
+	margin: 30px;
+	background-color: white;
+	box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.05);
+	padding: 20px;
+}
+
+article:hover {
+	border: 1px solid lightgrey;
+}
+
+h3 {
+	margin: 0;
+	font-weight: normal;
+}
+
+p {
+	color: grey;
+	margin: 10px 0;
+}
+
+.estimated-cost {
+	align-self: flex-end;
+	margin: 0;
+}
+
+.estimated-cost span {
+	font-size: 150%;
+	margin-left: 10px;
+	color: rgba(0, 0, 0, 0.8);
+}
