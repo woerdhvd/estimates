@@ -1,0 +1,14 @@
+<template name="adminlayout">
+		<link rel="stylesheet" href="/styles/admin.css">
+		<link rel="stylesheet" href="/styles/form.css">
+		<link rel="stylesheet" href="/styles/fonts.css">
+
+		<div class="container">
+		<nav>
+			<a href="estimates">Estimates</a>
+			<a href="form">Form</a>
+			<a id="logout">Log out</a>
+		</nav>
+			{{>yield}}
+		</div>
+</template>

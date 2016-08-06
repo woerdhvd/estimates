@@ -1,9 +1,0 @@
-{
-    "name": "reinvdwoerd/estimates",
-    "type": "project",
-    "require": {
-        "phpmailer/phpmailer": "^5.2",
-        "klein/klein": "^2.1",
-        "mustache/mustache": "^2.10"
-    }
-}

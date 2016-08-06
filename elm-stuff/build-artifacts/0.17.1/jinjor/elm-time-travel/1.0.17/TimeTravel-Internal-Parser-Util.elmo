@@ -1,6 +1,0 @@
-var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$equal = _Bogdanp$elm_combine$Combine$string('=');
-var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$comma = _Bogdanp$elm_combine$Combine$string(',');
-var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces = _Bogdanp$elm_combine$Combine$regex('[ ]*');
-var _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaced = function (p) {
-	return A3(_Bogdanp$elm_combine$Combine$between, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces, _jinjor$elm_time_travel$TimeTravel_Internal_Parser_Util$spaces, p);
-};

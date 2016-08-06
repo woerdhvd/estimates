@@ -1,0 +1,30 @@
+<template name="form">
+	<form>
+		<h1>Aanvraag prijsopgave website</h1> {{#if modified}} modified {{/if}}
+			<ul id="form-options">
+				{{#each formoptions}}
+
+				<li class="form-option" data-id="{{_id}}">
+					<input 		class="name"     		placeholder="Feature" value="{{name}}" />
+					<span 		class="euro">€</span>
+					<input 		class="cost" 	     	placeholder="Prijs" 	value="{{cost}}"/>
+					<textarea class="description" placeholder="Beschrijving">{{description}}</textarea>
+					<a class="add-suboption">+</a>
+					<a class="remove">-</a>
+					<ul class="sub-options">
+						{{#each subOptions}}
+
+							<li class="sub-option">
+								<input value="{{name}}" placeholder="name">
+								<input value="{{cost}}" placeholder="cost">
+							</li>
+
+						{{/each}}
+					</ul>
+				</li>
+
+				{{/each}}
+				<div class="new">+</div>
+		</ul>
+	</form>
+</template>
