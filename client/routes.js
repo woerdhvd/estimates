@@ -4,6 +4,7 @@ import {Estimates} from '../collections/Estimates'
  * Auth
  */
 Router.onBeforeAction(function () {
+		console.log(this)
 		if (!Meteor.users.findOne())
 				this.render('/setup')
 		else
