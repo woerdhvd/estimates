@@ -1,3 +1,5 @@
+import {Estimates} from '../collections/Estimates'
+
 /**
  * Auth
  */
@@ -40,6 +42,16 @@ Router.route('/admin/estimates', function () {
 		}
 })
 
+// FIXME: Duplication, data loading  -------------------
+Router.route('/admin/estimates/:_id', function () {
+		if (!Meteor.user())
+				this.redirect('/login')
+		else {
+				this.layout('adminlayout')
+				this.render('estimatedetail', {data: _ => Estimates.findOne(this.params._id)})
+		}
+})
+//---------------------------------------
 
 
 Router.route('/admin/form', function () {

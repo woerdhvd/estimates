@@ -1,0 +1,32 @@
+<template name="estimatedetail">
+	<link rel="stylesheet" href="/styles/estimates.css">
+
+
+	<article id="estimatedetail">
+		<section id="customer">
+			<h1>{{name}}</h1>
+			<p>{{date}}</p>
+			<p>{{email}}</p>
+		</section>
+
+
+		<ul id="form-options">
+			{{#each formoptions}}
+
+				<li class="form-option">
+					{{name}} <span class="cost">{{cost}}</span>
+
+					<ul class="sub-options">
+						{{#each suboption}}
+
+							<li class="sub-option">{{name}} {{cost}}</li>
+
+						{{/each}}
+					</ul>
+				</li>
+
+			{{/each}}
+		</ul>
+	</article>
+
+</template>

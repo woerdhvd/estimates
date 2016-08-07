@@ -16,7 +16,8 @@ Template.estimates.helpers({
 
 Template.estimates.events({
 	'click article' (e) {
-		const _id = $(e.target).attr('data-id')
+		const _id = $(e.target).closest('article').attr('data-id')
+		console.log(_id)
 		Router.go(`/admin/estimates/${_id}`)
 	}
 })

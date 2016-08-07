@@ -23,6 +23,22 @@ article {
 	padding: 20px;
 }
 
+article#estimatedetail {
+	padding: 32px;
+	height: auto;
+	width: 100%;
+	margin: 0;
+	border: none;
+	cursor: initial;
+}
+
+article#estimatedetail h1 {
+	font-size: 32px;
+	font-weight: normal;
+	margin-top: 0;
+}
+
+
 article:hover {
 	border: 1px solid lightgrey;
 }

@@ -1,9 +1,8 @@
-import { Accounts } from 'meteor/accounts-base'
-import { Template } from 'meteor/templating'
-
+import {Accounts} from 'meteor/accounts-base'
+import {Template} from 'meteor/templating'
 import sortable from 'html5sortable'
-import { SubOption, FormOption, FormOptions } from '../../collections/FormOptions'
-import { uid, updateProperty } from '../../utils'
+import {SubOption, FormOption, FormOptions} from '../../collections/FormOptions'
+import {uid, updateProperty} from '../../utils'
 
 
 /**
@@ -22,6 +21,7 @@ function updateOrder ({detail})
 }
 
 Template.form.rendered = reload
+
 
 Template.form.helpers({
 	formoptions: _ => FormOptions.find({}, {sort: {order: 1}})

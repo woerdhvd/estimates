@@ -51,31 +51,16 @@ export function filterObject (filter, object)
 	return remainingKeys.reduce((sum, key) => Object.assign(sum, {[key]: object[key]}), {})
 }
 
+
+const isFormOption = field => field != 'name' && field != 'email' && field != 'notes'
+const isOther 		 = field => !isFormOption(field)
+
 export function processForm (fields, collection)
 {
 	const formOptions = _.values(filterObject(isFormOption, fields))
 	const other				= filterObject(isOther, fields)
 
 	return {...other, formOptions}
-}
-
-
-function isFormOption (field)
-{
-	if (field != 'name' && field != 'email' && field != 'notes')
-		return true
-	else
-		return false
-}
-
-function isOther (field)
-{
-	return !isFormOption(field)
-}
-
-function isOn (_, value)
-{
-	return value == 'on'
 }
 
 /**
@@ -92,9 +77,7 @@ export function filterSubOptions (checkedIds, formOptionsFromDB)
  */
 export function calculateCost (formOptions)
 {
-	return formOptions.reduce((sum, formOption) => {
-		return sum + formOption.cost + formOption.subOptions.reduce((sum, subOption) => {
-			return sum + subOption.cost
-		}, 0)
-	}, 0)
+	return formOptions.reduce((sum, formOption) =>
+		sum + formOption.cost + formOption.subOptions.reduce((sum, subOption) =>
+			sum + subOption.cost, 0), 0)
 }

@@ -11,7 +11,7 @@ Template.customer.onCreated(function () {
 })
 
 Template.customer.helpers({
-	formoptions: _ => FormOptions.find().fetch()
+	formoptions: _ => FormOptions.find({}, {sort: {order: 1}})
 })
 
 
