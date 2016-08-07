@@ -81,3 +81,23 @@ export function calculateCost (formOptions)
 		sum + formOption.cost + formOption.subOptions.reduce((sum, subOption) =>
 			sum + subOption.cost, 0), 0)
 }
+
+
+/**
+ * Get a FormOtion's field's attributes
+ * @return object
+ */
+export function getFieldAttributes ($field)
+{
+	const id         = $($field).closest('.form-option').attr("data-id")
+	const subId 		 = $($field).closest('.sub-option').attr("data-id")
+	const key        = $($field).attr("class")
+	const value      = $($field).val()
+
+	return {
+		id,
+		subId,
+		key,
+		value: key == 'cost' ? Number(value) : value
+	}
+}
