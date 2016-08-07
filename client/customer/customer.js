@@ -16,10 +16,6 @@ Template.customer.helpers({
 
 
 Template.customer.events({
-	'click input[type="checkbox"]' (e, t) {
-		// t.checkedIds.
-	},
-
 	'submit form' (e) {
 		e.preventDefault()
 		let formData 		= processForm(getFormData(e.target))

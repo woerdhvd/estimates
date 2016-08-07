@@ -4,22 +4,39 @@
 
 	<article id="estimatedetail">
 		<section id="customer">
-			<h1>{{name}}</h1>
-			<p>{{date}}</p>
-			<p>{{email}}</p>
+			<h1>
+				{{name}}
+			</h1>
+			<p>
+				{{dateFormat date}}
+			</p>
+			<p>
+				<a href="mailto:{{email}}">{{email}}</a>
+			</p>
+
+			{{#if notes}}
+			<section id="notes">
+				<h4>Opmerkingen</h4>
+				<p>{{notes}}</p>
+			</section>
+			{{/if}}
 		</section>
-
-
+		<a class="remove"></a>
 		<ul id="form-options">
 			{{#each formoptions}}
 
 				<li class="form-option">
-					{{name}} <span class="cost">{{cost}}</span>
-
+					<main>
+						<span class="name">{{name}}</span>
+						<span class="cost">€{{cost}}</span>
+					</main>
 					<ul class="sub-options">
-						{{#each suboption}}
+						{{#each subOptions}}
 
-							<li class="sub-option">{{name}} {{cost}}</li>
+							<li class="sub-option">
+								<span class="name">{{name}}</span>
+								<span class="cost">€{{cost}}</span>
+							</li>
 
 						{{/each}}
 					</ul>
@@ -27,6 +44,9 @@
 
 			{{/each}}
 		</ul>
+		<section class="estimated-cost">
+			Geschatte kosten: <span>€{{estimatedCost formoptions}}</span>
+		</section>
 	</article>
 
 </template>

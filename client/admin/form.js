@@ -32,7 +32,7 @@ Template.form.events({
 		reload()
 	},
 
-	'click .remove' (e) {
+	'click .form-option > .remove' (e) {
 		const {id}   = getFieldAttributes(e.target)
 		FormOptions.remove(id)
 		reload()
@@ -55,6 +55,11 @@ Template.form.events({
 		const {id} 		 = getFieldAttributes(e.target)
 		let subId      = uid(FormOptions.findOne(id).subOptions)
 		FormOptions.update(id, {$push: {subOptions: new SubOption(subId)}})
+	},
+
+	'click .sub-option > .remove' (e) {
+		const {id, subId} = getFieldAttributes(e.target)
+		FormOptions.update(id, {$pull: {subOptions: {_id: subId}}})
 	},
 
 

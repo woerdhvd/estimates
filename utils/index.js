@@ -101,3 +101,9 @@ export function getFieldAttributes ($field)
 		value: key == 'cost' ? Number(value) : value
 	}
 }
+
+
+export function getEstimateId ($remove)
+{
+	return $($remove).closest('article').attr("data-id")
+}

@@ -7,9 +7,17 @@
 
 			<article data-id="{{_id}}">
 				<section class="customer">
-					<h3 class="name">{{name}}</h3>
-					<p class="email">{{email}}</p>
+					<h3>
+						{{name}}
+					</h3>
+					<p class="email">
+						<a href="mailto:{{email}}">{{email}}</a>
+					</p>
+					<p>
+						{{dateFormat date}}
+					</p>
 				</section>
+				<a class="remove"></a>
 				<p class="estimated-cost">
 					Geschatte kosten: <span>€{{estimatedCost formoptions}}</span>
 				</p>

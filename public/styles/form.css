@@ -103,7 +103,7 @@ form h1 {
 	outline: none;
 }
 
-.remove, .add-suboption {
+.form-option > .remove, .add-suboption {
 	position: absolute;
 	right: -10px;
 	background: none;
@@ -112,7 +112,7 @@ form h1 {
 	color: grey;
 }
 
-.remove {
+.form-option > .remove {
 	top: 30px;
 }
 
@@ -163,6 +163,11 @@ form h1 {
 .sub-options {
 	padding: 0 20px;
 	list-style: none;
+}
+
+.sub-option > .euro {
+	font-size: 12px;
+
 }
 
 .sub-option > input {

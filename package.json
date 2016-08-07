@@ -5,6 +5,7 @@
     "start": "meteor run"
   },
   "dependencies": {
+    "dateformat": "^1.0.12",
     "get-form-data": "^1.2.5",
     "html5-sortable": "^1.0.2",
     "jquery-ui": "^1.12.0",
