@@ -2,12 +2,12 @@
 	<link rel="stylesheet" href="/styles/form.css">
 	<link rel="stylesheet" href="/styles/fonts.css">
 	<div class="container">
-		<form>
+		<form class="customer">
 			<h1>Aanvraag prijsopgave website</h1>
 
 			<h3>Contact informatie</h3>
-			<input name="email" type="text" placeholder="E-mail">
-			<input name="name"  type="text" placeholder="Volledige naam">
+			<input name="email" type="email" placeholder="E-mail" required>
+			<input name="name"  type="text" placeholder="Volledige naam" required>
 
 			<ul id="form-options">
 			{{#each formoptions}}

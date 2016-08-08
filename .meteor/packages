@@ -23,3 +23,4 @@ accounts-password
 iron:router
 templates:array
 mizzao:jquery-ui
+themeteorchef:jquery-validation

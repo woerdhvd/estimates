@@ -15,6 +15,10 @@ Router.route('/', function () {
 		this.render('customer')
 })
 
+Router.route('/submit', function () {
+		this.render('submit')
+})
+
 Router.route('/setup', function () {
 		if (Meteor.users.findOne())
 				this.redirect('/')

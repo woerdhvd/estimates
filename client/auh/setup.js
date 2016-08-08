@@ -1,20 +1,23 @@
-import { Accounts } from 'meteor/accounts-base'
-import { Template } from 'meteor/templating'
+import {Accounts} from 'meteor/accounts-base'
+import {Template} from 'meteor/templating'
+import urlencode  from 'urlencode'
 import './setup.html'
 
-Template.setup.helpers({
-
+Template.setup.onCreated(function () {
+	$('form').validate()
 })
 
 Template.setup.events({
-		// Form validation here...
-
 		'submit form' (event) {
-				event.preventDefault()
-				Accounts.createUser({
-						email: $('#email').val(),
-						username: $('#username').val(),
-						password: $('#password').val()
-				})
+			event.preventDefault()
+
+			const email 	 = urlencode($('#email').val())
+			const password = $('#password').val()
+			const host 		 = $('#host').val()
+			const port 		 = $('#port').val()
+
+			const mailUrl  = `smtp://${email}:${password}@${host}:${port}`
+
+			Accounts.createUser({email, password, profile: {mailUrl}})
 		}
 })

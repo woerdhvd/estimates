@@ -1,8 +1,12 @@
 @font-face {
-    font-family: Mark Pro;
-    src: url('../fonts/MarkWebPro-Book.woff');
+		font-family: Mark Pro;
+		src: url('../fonts/MarkWebPro-Book.woff');
 }
 
 *:not(pre) {
-  font-family: Mark Pro;
+	font-family: Mark Pro;
+}
+
+* {
+	box-sizing: border-box;
 }
