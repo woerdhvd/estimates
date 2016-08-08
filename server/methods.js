@@ -17,8 +17,9 @@ Meteor.methods({
 	},
 
 	sendMail (estimate) {
-		sendNotification(estimate)
-		sendConfirmation(estimate)
+		const {email} = getUserEmail()
+		sendNotification(email, estimate)
+		sendConfirmation(email, estimate)
 	}
 
 
