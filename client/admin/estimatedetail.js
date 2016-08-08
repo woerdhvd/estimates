@@ -4,13 +4,10 @@ import dateFormat from 'dateformat'
 import {Estimates} from '../../collections/Estimates'
 import {calculateCost} from '../../utils'
 
-Template.estimatedetail.onCreated(function () {
-	console.log(this)
-})
-
 Template.estimatedetail.helpers({
+	// estimate: 		 _ => Estimates.findOne(Router.getParam('_id')),
 	estimatedCost: formOptions => calculateCost(formOptions),
-	dateFormat: 	 date 			 => dateFormat(date, "fullDate")
+	dateFormat: 	 date => dateFormat(date, "fullDate")
 })
 
 

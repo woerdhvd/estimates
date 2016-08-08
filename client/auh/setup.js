@@ -10,13 +10,12 @@ Template.setup.onCreated(function () {
 Template.setup.events({
 		'submit form' (event) {
 			event.preventDefault()
-
-			const email 	 = urlencode($('#email').val())
+			const email 	 = $('#email').val()
 			const password = $('#password').val()
 			const host 		 = $('#host').val()
 			const port 		 = $('#port').val()
 
-			const mailUrl  = `smtp://${email}:${password}@${host}:${port}`
+			const mailUrl = `smtp://${urlencode(email)}:${password}@${host}:${port}`
 
 			Accounts.createUser({email, password, profile: {mailUrl}})
 		}

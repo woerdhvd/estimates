@@ -125,15 +125,12 @@ form h1 {
 .form-option > .description {
 	padding: 5px 10px;
 	resize: vertical;
-	min-height: 150px;
 	border: none;
+	min-height: 100px;
 	font-size: 15px;
 	width: 100%;
 }
 
-.description::-webkit-scrollbar {
-	display: none;
-}
 
 .new {
 	border: 1px dashed lightgrey;

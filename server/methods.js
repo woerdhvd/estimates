@@ -1,6 +1,10 @@
 import { Meteor } from 'meteor/meteor'
 import { FormOptions } from '../collections/FormOptions'
-import './mail'
+import {sendNotification, sendConfirmation} from './mail'
+
+Meteor.startup(() => {
+
+})
 
 Meteor.methods({
 
@@ -12,8 +16,9 @@ Meteor.methods({
 		FormOptions.update(docB._id, {$set: {order: a}})
 	},
 
-	sendConfirmation () {
-
+	sendMail (estimate) {
+		sendNotification(estimate)
+		sendConfirmation(estimate)
 	}
 
 

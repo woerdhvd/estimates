@@ -20,7 +20,10 @@ Template.customer.events({
 		let formOptions = FormOptions.find({_id: {$in: formData.formOptions}}).fetch()
 		formOptions     = filterSubOptions(formData.formOptions, formOptions)
 
-		Estimates.insert(new Estimate(formData, formOptions))
+		const estimate = new Estimate(formData, formOptions)
+		Estimates.insert(estimate)
+
+		Meteor.call('sendMail', estimate)
 		Router.go('/submit')
 	}
 })
