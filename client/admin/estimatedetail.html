@@ -1,53 +1,53 @@
 <template name="estimatedetail">
-	<link rel="stylesheet" href="/styles/estimates.css">
+  <link rel="stylesheet" href="/styles/estimates.css">
 
-	{{#with estimate}}
-	<article id="estimatedetail">
-		<section id="customer">
-			<h1>
-				{{name}}
-			</h1>
-			<p>
-				{{dateFormat date}}
-			</p>
-			<p>
-				<a href="mailto:{{email}}">{{email}}</a>
-			</p>
+  <!-- {{#with estimate}} -->
+  <article id="estimatedetail">
+    <section id="customer">
+      <h1>
+        {{name}}
+      </h1>
+      <p>
+        {{dateFormat date}}
+      </p>
+      <p>
+        <a href="mailto:{{email}}">{{email}}</a>
+      </p>
 
-			{{#if notes}}
-			<section id="notes">
-				<h4>Opmerkingen</h4>
-				<p>{{notes}}</p>
-			</section>
-			{{/if}}
-		</section>
-		<a class="remove"></a>
-		<ul id="form-options">
-			{{#each formoptions}}
+      {{#if notes}}
+      <section id="notes">
+        <h4>Opmerkingen</h4>
+        <p>{{notes}}</p>
+      </section>
+      {{/if}}
+    </section>
+    <a class="remove"></a>
+    <ul id="form-options">
+      {{#each formoptions}}
 
-				<li class="form-option">
-					<main>
-						<span class="name">{{name}}</span>
-						<span class="cost">€{{cost}}</span>
-					</main>
-					<ul class="sub-options">
-						{{#each subOptions}}
+        <li class="form-option">
+          <main>
+            <span class="name">{{name}}</span>
+            <span class="cost">€{{cost}}</span>
+          </main>
+          <ul class="sub-options">
+            {{#each subOptions}}
 
-							<li class="sub-option">
-								<span class="name">{{name}}</span>
-								<span class="cost">€{{cost}}</span>
-							</li>
+              <li class="sub-option">
+                <span class="name">{{name}}</span>
+                <span class="cost">€{{cost}}</span>
+              </li>
 
-						{{/each}}
-					</ul>
-				</li>
+            {{/each}}
+          </ul>
+        </li>
 
-			{{/each}}
-		</ul>
-		<section class="estimated-cost">
-			Geschatte kosten: <span>€{{estimatedCost formoptions}}</span>
-		</section>
-	</article>
+      {{/each}}
+    </ul>
+    <section class="estimated-cost">
+      Geschatte kosten: <span>€{{estimatedCost formoptions}}</span>
+    </section>
+  </article>
 
-	{{/with}}
+  <!-- {{/with}} -->
 </template>

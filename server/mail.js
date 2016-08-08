@@ -8,19 +8,19 @@ import {calculateCost} from '../utils'
  */
 const helpers =
 {
-	calculateCost,
-	dateFormat: date => dateFormat(date, "fullDate")
+  estimatedCost: calculateCost,
+  dateFormat: date => dateFormat(date, "fullDate")
 }
 
 
 export function getUserEmail ()
 {
-	const {profile, emails} = Meteor.users.findOne()
-	const email   = emails[0].address
-	const mailUrl = profile.mailUrl
+  const {profile, emails} = Meteor.users.findOne()
+  const email   = emails[0].address
+  const mailUrl = profile.mailUrl
 
-	process.env.MAIL_URL = mailUrl
-	return {mailUrl, email}
+  process.env.MAIL_URL = mailUrl
+  return {mailUrl, email}
 }
 
 
@@ -29,12 +29,12 @@ export function getUserEmail ()
 */
 export function sendNotification (email, estimate)
 {
-	Email.send({
-		from: email,
-		to: email,
-		subject: 'Aanvraag prijsopgave website',
-		html: renderTemplate('notification', helpers, estimate)
-	})
+  Email.send({
+    from: email,
+    to: email,
+    subject: 'Aanvraag prijsopgave website',
+    html: renderTemplate('notification', helpers, estimate)
+  })
 }
 
 /**
@@ -43,12 +43,12 @@ export function sendNotification (email, estimate)
  */
 export function sendConfirmation (email, estimate)
 {
-	Email.send({
-		from: email,
-		to: estimate.email,
-		subject: 'Aanvraag prijsopgave website',
-		html: renderTemplate('confirmation', helpers, estimate)
-	})
+  Email.send({
+    from: email,
+    to: estimate.email,
+    subject: 'Aanvraag prijsopgave website',
+    html: renderTemplate('confirmation', helpers, estimate)
+  })
 }
 
 
@@ -58,7 +58,7 @@ export function sendConfirmation (email, estimate)
  */
 function renderTemplate (name, helpers, context)
 {
-	SSR.compileTemplate(name, Assets.getText(`${name}.html`))
-	Template[name].helpers(helpers)
-	return SSR.render(name, context)
+  SSR.compileTemplate(name, Assets.getText(`${name}.html`))
+  Template[name].helpers(helpers)
+  return SSR.render(name, context)
 }
